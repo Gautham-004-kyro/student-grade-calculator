@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-p5xhabij82xg(rg37sv@(+ndbdz#8p-pdo(5zi(!$)(=e%mn!a
 DEBUG = False
 LOGIN_URL = '/login/'
 ALLOWED_HOSTS = [
-    "student-grade-calculator-yu9q.onrender.com",
+    "https://student-grade-calculator-yu9q.onrender.com",
     "127.0.0.1",
     "localhost"
 ]
