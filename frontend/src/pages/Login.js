@@ -13,7 +13,7 @@ function Login() {
 
     try {
       const res = await fetch(
-  "http://localhost:8000/api/login/",
+  "https://student-grade-calculator-yu9q.onrender.com/api/login/",
   {
     method: "POST",
 

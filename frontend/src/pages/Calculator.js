@@ -47,7 +47,7 @@ function Calculator() {
     try {
 
       const res = await fetch(
-        "http://localhost:8000/api/calculate/",
+        "https://student-grade-calculator-yu9q.onrender.com/api/calculate/",
         {
           method: "POST",
 

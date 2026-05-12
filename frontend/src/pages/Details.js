@@ -48,7 +48,7 @@ const [editData, setEditData] = useState({
     try {
 
       const res = await fetch(
-        "http://localhost:8000/api/students/"
+        "https://student-grade-calculator-yu9q.onrender.com/api/students/"
       );
 
       const data = await res.json();
@@ -71,7 +71,7 @@ const [editData, setEditData] = useState({
 
     await fetch(
 
-      `http://localhost:8000/api/delete-student/${id}/`,
+      `https://student-grade-calculator-yu9q.onrender.com/api/delete-student/${id}/`,
 
       {
         method: "DELETE",
@@ -175,7 +175,7 @@ const updateStudent = async () => {
 
     await fetch(
 
-      `http://localhost:8000/api/update-student/${editData.id}/`,
+      `https://student-grade-calculator-yu9q.onrender.com/api/update-student/${editData.id}/`,
 
       {
 
