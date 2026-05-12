@@ -32,9 +32,13 @@ SESSION_COOKIE_HTTPONLY = True
 SECRET_KEY = 'django-insecure-p5xhabij82xg(rg37sv@(+ndbdz#8p-pdo(5zi(!$)(=e%mn!a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 LOGIN_URL = '/login/'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "student-grade-calculator-yu9q.onrender.com",
+    "127.0.0.1",
+    "localhost"
+]
 
 # Application definition
 
