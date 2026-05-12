@@ -40,6 +40,11 @@ ALLOWED_HOSTS = [
     "localhost"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://student-grade-calculator-yu9q.onrender.com",
+    "https://student-grade-calculator-1-phzz.onrender.com"
+]
+
 # Application definition
 
 INSTALLED_APPS = [
