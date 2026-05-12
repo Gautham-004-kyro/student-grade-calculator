@@ -249,23 +249,12 @@ STATIC_URL = "static/"
 
 
 
-# EMAIL SETTINGS
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-EMAIL_HOST = "smtp.gmail.com"
-
-EMAIL_PORT = 587
-
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.environ.get("onboarding@resend.dev", "")
-
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or "noreply@student-grade-calculator.onrender.com"
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
-
-
 # DEFAULT AUTO FIELD
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+# RESEND API
+
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY")

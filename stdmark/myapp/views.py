@@ -89,49 +89,81 @@ def api_login(request):
     }, status=405)
 
 
+resend.api_key = os.environ.get("RESEND_API_KEY")
+
 otp_storage = {}
+
+
 
 @csrf_exempt
 def send_otp(request):
-    try:
-        if request.method != 'POST':
-            return JsonResponse({
-                "error": "Only POST allowed"
-            }, status=405)
 
-        data = json.loads(request.body)
-        email = data.get('email')
-        if not email:
-            return JsonResponse({
-                "error": "Email is required"
-            }, status=400)
-
-        otp = str(random.randint(100000, 999999))
-        otp_storage[email] = otp
+    if request.method == "POST":
 
         try:
-            resend.api_key = settings.RESEND_API_KEY
-            response = resend.Emails.send({
-                "from": settings.DEFAULT_FROM_EMAIL,
+
+            data = json.loads(request.body)
+
+            email = data.get("email")
+
+
+
+            otp = str(
+
+                random.randint(
+                    100000,
+                    999999
+                )
+            )
+
+
+
+            otp_storage[email] = otp
+
+
+
+            resend.Emails.send({
+
+                "from":
+                "onboarding@resend.dev",
+
                 "to": email,
-                "subject": "Your OTP Code",
-                "html": f"<p>Your OTP is <strong>{otp}</strong>.</p>",
+
+                "subject":
+                "OTP Verification",
+
+                "html":
+                f"<h2>Your OTP is: {otp}</h2>",
+
             })
-        except Exception as exc:
+
+
+
             return JsonResponse({
-                "error": "Unable to send OTP",
-                "details": str(exc),
+
+                "message":
+                "OTP sent successfully"
+
+            })
+
+
+
+        except Exception as e:
+
+            return JsonResponse({
+
+                "error": str(e)
+
             }, status=500)
 
-        return JsonResponse({
-            "message": "OTP sent successfully",
-            "resend_response": response,
-        })
-    except Exception as exc:
-        return JsonResponse({
-            "error": "Server error",
-            "details": str(exc),
-        }, status=500)
+
+
+    return JsonResponse({
+
+        "error":
+        "Only POST allowed"
+
+    }),
 @csrf_exempt
 def verify_otp(request):
 
