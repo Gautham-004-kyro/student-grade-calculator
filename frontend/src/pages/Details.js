@@ -347,7 +347,7 @@ const updateStudent = async () => {
                         }}
                       >
 
-                        Edit
+                        Edit Details
 
                       </button>
 
@@ -365,7 +365,7 @@ const updateStudent = async () => {
                   }
                 >
 
-                  PDF
+                  Download PDF
 
                 </button>
 
@@ -397,7 +397,7 @@ const updateStudent = async () => {
                         }}
                 >
 
-                  Delete
+                  Delete Student
 
                 </button>
 
