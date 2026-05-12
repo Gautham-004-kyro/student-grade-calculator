@@ -5,11 +5,10 @@ from .models import Student
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth import authenticate, login, logout
-from django.forms.models import model_to_dict
 import random
 from django.conf import settings
-from django.core.mail import send_mail
-import os
+import requests
+
 
 @csrf_exempt
 def register(request):
@@ -129,24 +128,43 @@ def send_otp(request):
 
             otp_storage[email] = otp
 
-            send_mail(
+            response = requests.post(
 
-                "OTP Verification",
+                "https://api.promailer.xyz/send",
 
-                f"Your OTP is: {otp}",
+                headers={
 
-                settings.DEFAULT_FROM_EMAIL,
+                    "Authorization":
+                    f"Bearer {settings.PROMAILER_API_KEY}",
 
-                [email],
+                    "Content-Type":
+                    "application/json"
 
-                fail_silently=False,
+                },
+
+                json={
+
+                    "to": email,
+
+                    "subject":
+                    "OTP Verification",
+
+                    "html":
+                    f"<h2>Your OTP is: {otp}</h2>"
+
+                },
+
+                timeout=20
 
             )
 
             return JsonResponse({
 
                 "message":
-                "OTP sent successfully"
+                "OTP sent successfully",
+
+                "response":
+                response.text
 
             })
 
@@ -165,8 +183,6 @@ def send_otp(request):
         "Only POST allowed"
 
     })
-
-
 @csrf_exempt
 def verify_otp(request):
 
