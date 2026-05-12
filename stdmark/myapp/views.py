@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.forms.models import model_to_dict
 from django.core.mail import send_mail
 import random
-
+from django.conf import settings
 
 @csrf_exempt
 def register(request):
@@ -104,27 +104,37 @@ def send_otp(request):
 
         otp_storage[email] = otp
 
+
+
         send_mail(
 
-            ' OTP Code',
+            'OTP Code',
 
             f'Your OTP is {otp}',
 
-            'yourgmail@gmail.com',
+            settings.EMAIL_HOST_USER,
 
             [email],
 
             fail_silently=False,
+
         )
 
+
+
         return JsonResponse({
+
             "message": "OTP sent successfully"
+
         })
 
-    return JsonResponse({
-        "error": "Only POST allowed"
-    })
 
+
+    return JsonResponse({
+
+        "error": "Only POST allowed"
+
+    })
 @csrf_exempt
 def verify_otp(request):
 
