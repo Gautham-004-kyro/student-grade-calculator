@@ -9,6 +9,7 @@ from django.forms.models import model_to_dict
 import random
 import resend
 from django.conf import settings
+import
 
 @csrf_exempt
 def register(request):
@@ -94,8 +95,7 @@ resend.api_key = os.environ.get("RESEND_API_KEY")
 otp_storage = {}
 
 
-
-@csrf_exempt
+@csrf_exempt      
 def send_otp(request):
 
     if request.method == "POST":
@@ -122,12 +122,12 @@ def send_otp(request):
 
 
 
-            resend.Emails.send({
+            response = resend.Emails.send({
 
                 "from":
                 "onboarding@resend.dev",
 
-                "to": email,
+                "to": [email],
 
                 "subject":
                 "OTP Verification",
@@ -142,7 +142,10 @@ def send_otp(request):
             return JsonResponse({
 
                 "message":
-                "OTP sent successfully"
+                "OTP sent successfully",
+
+                "resend":
+                str(response)
 
             })
 
@@ -163,7 +166,9 @@ def send_otp(request):
         "error":
         "Only POST allowed"
 
-    }),
+    })
+
+
 @csrf_exempt
 def verify_otp(request):
 
