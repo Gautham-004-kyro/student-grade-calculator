@@ -9,7 +9,6 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-
 load_dotenv()
 
 
@@ -256,7 +255,6 @@ STATIC_URL = "static/"
 # DEFAULT AUTO FIELD
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 # EMAIL CONFIGURATION (GMAIL SMTP)
 
