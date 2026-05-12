@@ -93,11 +93,13 @@ otp_storage = {}
 
 @csrf_exempt
 def send_otp(request):
-
-    if request.method == 'POST':
+    try:
+        if request.method != 'POST':
+            return JsonResponse({
+                "error": "Only POST allowed"
+            }, status=405)
 
         data = json.loads(request.body)
-
         email = data.get('email')
         if not email:
             return JsonResponse({
@@ -124,14 +126,11 @@ def send_otp(request):
         return JsonResponse({
             "message": "OTP sent successfully"
         })
-
-
-
-    return JsonResponse({
-
-        "error": "Only POST allowed"
-
-    })
+    except Exception as exc:
+        return JsonResponse({
+            "error": "Server error",
+            "details": str(exc),
+        }, status=500)
 @csrf_exempt
 def verify_otp(request):
 
