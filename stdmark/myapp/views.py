@@ -92,10 +92,11 @@ def api_login(request):
 
 resend.api_key = os.environ.get("RESEND_API_KEY")
 
+   
 otp_storage = {}
 
 
-@csrf_exempt      
+@csrf_exempt
 def send_otp(request):
 
     if request.method == "POST":
@@ -106,50 +107,29 @@ def send_otp(request):
 
             email = data.get("email")
 
-
-
             otp = str(
-
                 random.randint(
                     100000,
                     999999
                 )
             )
 
-
-
             otp_storage[email] = otp
 
-
-
-            response = resend.Emails.send({
-
-                "from":
-                "onboarding@resend.dev",
-
-                "to": [email],
-
-                "subject":
+            send_mail(
                 "OTP Verification",
-
-                "html":
-                f"<h2>Your OTP is: {otp}</h2>",
-
-            })
-
-
+                f"Your OTP is: {otp}",
+                None,
+                [email],
+                fail_silently=False,
+            )
 
             return JsonResponse({
 
                 "message":
-                "OTP sent successfully",
-
-                "resend":
-                str(response)
+                "OTP sent successfully"
 
             })
-
-
 
         except Exception as e:
 
@@ -158,8 +138,6 @@ def send_otp(request):
                 "error": str(e)
 
             }, status=500)
-
-
 
     return JsonResponse({
 
