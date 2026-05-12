@@ -256,6 +256,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-PROMAILER_API_KEY = os.environ.get(
-    "PROMAILER_API_KEY"
+BREVO_API_KEY = os.environ.get(
+    "BREVO_API_KEY"
 )

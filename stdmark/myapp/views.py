@@ -7,7 +7,8 @@ import json
 from django.contrib.auth import authenticate, login, logout
 import random
 from django.conf import settings
-import requests
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
 
 @csrf_exempt
@@ -111,7 +112,7 @@ def send_otp(request):
                 return JsonResponse({
 
                     "error":
-                    "Email is required"
+                    "Email required"
 
                 }, status=400)
 
@@ -128,45 +129,67 @@ def send_otp(request):
 
             otp_storage[email] = otp
 
-            response = requests.post(
+            configuration = sib_api_v3_sdk.Configuration()
 
-                "https://api.promailer.xyz/send",
+            configuration.api_key['api-key'] = (
+                settings.BREVO_API_KEY
+            )
 
-                headers={
+            api_instance = (
+                sib_api_v3_sdk.TransactionalEmailsApi(
+                    sib_api_v3_sdk.ApiClient(
+                        configuration
+                    )
+                )
+            )
 
-                    "Authorization":
-                    f"Bearer {settings.PROMAILER_API_KEY}",
+            send_smtp_email = (
+                sib_api_v3_sdk.SendSmtpEmail(
 
-                    "Content-Type":
-                    "application/json"
+                    to=[{
 
-                },
+                        "email": email
 
-                json={
+                    }],
 
-                    "to": email,
+                    sender={
 
-                    "subject":
+                        "name":
+                        "Student Grade Calculator",
+
+                        "email":
+                        "gauthamkrishna004@gmail.com"
+
+                    },
+
+                    subject=
                     "OTP Verification",
 
-                    "html":
+                    html_content=
                     f"<h2>Your OTP is: {otp}</h2>"
 
-                },
+                )
+            )
 
-                timeout=20
-
+            api_instance.send_transac_email(
+                send_smtp_email
             )
 
             return JsonResponse({
 
                 "message":
-                "OTP sent successfully",
-
-                "response":
-                response.text
+                "OTP sent successfully"
 
             })
+
+        except ApiException as e:
+
+            return JsonResponse({
+
+                "error":
+                str(e)
+
+            }, status=500)
 
         except Exception as e:
 
