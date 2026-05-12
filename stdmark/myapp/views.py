@@ -9,7 +9,7 @@ from django.forms.models import model_to_dict
 import random
 import resend
 from django.conf import settings
-import
+import os
 
 @csrf_exempt
 def register(request):
