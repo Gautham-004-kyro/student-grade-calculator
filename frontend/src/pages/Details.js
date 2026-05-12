@@ -145,22 +145,7 @@ function Students() {
   };
 
   const sortedStudents = [...students].sort((a, b) => {
-    const indexOfLastStudent =
-  currentPage * studentsPerPage;
-
-const indexOfFirstStudent =
-  indexOfLastStudent - studentsPerPage;
-
-const currentStudents =
-  sortedStudents.slice(
-    indexOfFirstStudent,
-    indexOfLastStudent
-  );
-
-const totalPages = Math.ceil(
-  sortedStudents.length / studentsPerPage
-);
-
+    
   if (sortType === "name") {
 
     return a.name.localeCompare(b.name);
@@ -185,8 +170,26 @@ const totalPages = Math.ceil(
 
   }
 
+  
+
   return 0;
 });
+
+const indexOfLastStudent =
+  currentPage * studentsPerPage;
+
+const indexOfFirstStudent =
+  indexOfLastStudent - studentsPerPage;
+
+const currentStudents =
+  sortedStudents.slice(
+    indexOfFirstStudent,
+    indexOfLastStudent
+  );
+
+const totalPages = Math.ceil(
+  sortedStudents.length / studentsPerPage
+);
 
 const updateStudent = async () => {
 
