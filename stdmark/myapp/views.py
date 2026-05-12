@@ -6,8 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth import authenticate, login, logout
 from django.forms.models import model_to_dict
-from django.core.mail import send_mail
 import random
+import resend
 from django.conf import settings
 
 @csrf_exempt
@@ -110,13 +110,13 @@ def send_otp(request):
         otp_storage[email] = otp
 
         try:
-            send_mail(
-                'OTP Code',
-                f'Your OTP is {otp}',
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
-            )
+            resend.api_key = settings.RESEND_API_KEY
+            response = resend.Emails.send({
+                "from": settings.DEFAULT_FROM_EMAIL,
+                "to": email,
+                "subject": "Your OTP Code",
+                "html": f"<p>Your OTP is <strong>{otp}</strong>.</p>",
+            })
         except Exception as exc:
             return JsonResponse({
                 "error": "Unable to send OTP",
@@ -124,7 +124,8 @@ def send_otp(request):
             }, status=500)
 
         return JsonResponse({
-            "message": "OTP sent successfully"
+            "message": "OTP sent successfully",
+            "resend_response": response,
         })
     except Exception as exc:
         return JsonResponse({
