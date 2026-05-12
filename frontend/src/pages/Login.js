@@ -12,17 +12,14 @@ function Login() {
     setError("");
 
     try {
-      const res = await fetch(
+          const res = await fetch(
   "https://student-grade-calculator-yu9q.onrender.com/api/login/",
   {
     method: "POST",
-
     headers: {
       "Content-Type": "application/json",
     },
-
     credentials: "include",
-
     body: JSON.stringify({
       username,
       password,
@@ -30,16 +27,24 @@ function Login() {
   }
 );
 
-      const data = await res.json();
+const text = await res.text();
 
-      if (res.ok) {
-        if (res.ok) {
-           localStorage.setItem("loggedIn", "true");
-              navigate("/home");
-        } 
-      } else {
-        setError(data.error || "Login failed");
-      }
+let data;
+
+try {
+  data = JSON.parse(text);
+} catch {
+  console.log(text);
+  setError("Server returned invalid response");
+  return;
+}
+
+if (res.ok) {
+  localStorage.setItem("loggedIn", "true");
+  navigate("/home");
+} else {
+  setError(data.error || "Login failed");
+}
 
     } catch (err) {
       console.error(err);
