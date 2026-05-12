@@ -92,7 +92,6 @@ def api_login(request):
 
 otp_storage = {}
 
-
 @csrf_exempt
 def send_otp(request):
 
@@ -100,25 +99,48 @@ def send_otp(request):
 
         try:
 
-            data = json.loads(request.body)
+            data = json.loads(
+                request.body
+            )
 
-            email = data.get("email")
+            email = data.get(
+                "email"
+            )
+
+            if not email:
+
+                return JsonResponse({
+
+                    "error":
+                    "Email is required"
+
+                }, status=400)
 
             otp = str(
+
                 random.randint(
+
                     100000,
                     999999
+
                 )
+
             )
 
             otp_storage[email] = otp
 
             send_mail(
+
                 "OTP Verification",
+
                 f"Your OTP is: {otp}",
+
                 settings.DEFAULT_FROM_EMAIL,
+
                 [email],
+
                 fail_silently=False,
+
             )
 
             return JsonResponse({
@@ -132,7 +154,8 @@ def send_otp(request):
 
             return JsonResponse({
 
-                "error": str(e)
+                "error":
+                str(e)
 
             }, status=500)
 
