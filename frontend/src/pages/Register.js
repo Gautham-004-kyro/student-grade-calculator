@@ -166,8 +166,8 @@ function Register() {
 
 
   return (
-
-    <div className="container">
+<div className="register-page">
+    <div className="register-container">
 
       <h2 className="title">
         Create an Account 
@@ -319,6 +319,7 @@ function Register() {
       )}
 
     </div>
+</div>
   );
 }
 
