@@ -99,33 +99,30 @@ def send_otp(request):
         data = json.loads(request.body)
 
         email = data.get('email')
+        if not email:
+            return JsonResponse({
+                "error": "Email is required"
+            }, status=400)
 
         otp = str(random.randint(100000, 999999))
-
         otp_storage[email] = otp
 
-
-
-        send_mail(
-
-            'OTP Code',
-
-            f'Your OTP is {otp}',
-
-            settings.EMAIL_HOST_USER,
-
-            [email],
-
-            fail_silently=False,
-
-        )
-
-
+        try:
+            send_mail(
+                'OTP Code',
+                f'Your OTP is {otp}',
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+        except Exception as exc:
+            return JsonResponse({
+                "error": "Unable to send OTP",
+                "details": str(exc),
+            }, status=500)
 
         return JsonResponse({
-
             "message": "OTP sent successfully"
-
         })
 
 
