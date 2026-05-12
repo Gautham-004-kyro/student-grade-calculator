@@ -6,6 +6,10 @@ import jsPDF from "jspdf";
 
 function Students() {
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const studentsPerPage = 5;
+
   const [students, setStudents] = useState([]);
 
   const [sortType, setSortType] = useState("");
@@ -14,7 +18,7 @@ function Students() {
 
   const [showEditPopup, setShowEditPopup] = useState(false);
 
-const [editData, setEditData] = useState({
+  const [editData, setEditData] = useState({
 
   id: "",
 
@@ -141,6 +145,21 @@ const [editData, setEditData] = useState({
   };
 
   const sortedStudents = [...students].sort((a, b) => {
+    const indexOfLastStudent =
+  currentPage * studentsPerPage;
+
+const indexOfFirstStudent =
+  indexOfLastStudent - studentsPerPage;
+
+const currentStudents =
+  sortedStudents.slice(
+    indexOfFirstStudent,
+    indexOfLastStudent
+  );
+
+const totalPages = Math.ceil(
+  sortedStudents.length / studentsPerPage
+);
 
   if (sortType === "name") {
 
@@ -291,7 +310,7 @@ const updateStudent = async () => {
 
         <tbody>
 
-          {sortedStudents.map((student) =>(
+          {currentStudents.map((student) => (
 
             <tr key={student.id}>
 
