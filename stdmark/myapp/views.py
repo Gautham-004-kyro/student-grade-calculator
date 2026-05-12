@@ -7,8 +7,8 @@ import json
 from django.contrib.auth import authenticate, login, logout
 from django.forms.models import model_to_dict
 import random
-import resend
 from django.conf import settings
+from django.core.mail import send_mail
 import os
 
 @csrf_exempt
@@ -90,9 +90,6 @@ def api_login(request):
     }, status=405)
 
 
-resend.api_key = os.environ.get("RESEND_API_KEY")
-
-   
 otp_storage = {}
 
 
@@ -119,7 +116,7 @@ def send_otp(request):
             send_mail(
                 "OTP Verification",
                 f"Your OTP is: {otp}",
-                None,
+                settings.DEFAULT_FROM_EMAIL,
                 [email],
                 fail_silently=False,
             )
