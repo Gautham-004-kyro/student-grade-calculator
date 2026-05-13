@@ -48,6 +48,8 @@ ALLOWED_HOSTS = [
 CORS_ALLOWED_ORIGINS = [
     "https://student-grade-calculator-yu9q.onrender.com",
     "https://student-grade-calculator-1-phzz.onrender.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -78,6 +80,8 @@ CSRF_TRUSTED_ORIGINS = [
 
     "https://student-grade-calculator-1-phzz.onrender.com",
 
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 

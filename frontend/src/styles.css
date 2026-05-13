@@ -529,7 +529,7 @@ th {
 
   .main-layout {
 
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     align-items: center;
 
