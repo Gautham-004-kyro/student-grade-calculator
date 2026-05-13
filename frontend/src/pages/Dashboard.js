@@ -196,25 +196,7 @@ const topper =
 
       <header className="top-header">
 
-        <div className="logo-section">
-
-        
-
-          <span>
-
-            Student Result Management
-
-          </span>
-
-        </div>
-
-
-
-        <div className="header-title">
-
-          Analytics Dashboard
-
-        </div>
+      
 
 
 
