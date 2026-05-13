@@ -21,6 +21,6 @@ urlpatterns = [
 
     path('delete-student/<int:student_id>/', views.delete_student),
 
-    path("update-student/<int:id>/",views.update_student,),
+    path("update-student/<int:id>/",views.update_student),
 
 ]
