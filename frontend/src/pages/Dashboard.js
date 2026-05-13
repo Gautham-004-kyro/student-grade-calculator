@@ -114,6 +114,75 @@ function Dashboard() {
 
   ];
 
+  const totalStudents =
+  students.length;
+
+
+
+const averagePercentage =
+
+  students.length > 0
+
+    ? (
+
+        students.reduce(
+
+          (sum, student) =>
+
+            sum + student.percentage,
+
+          0
+
+        ) / students.length
+
+      ).toFixed(2)
+
+    : 0;
+
+
+
+const passCount =
+
+  students.filter(
+
+    (student) =>
+
+      student.status === "Pass"
+
+  ).length;
+
+
+
+const failCount =
+
+  students.filter(
+
+    (student) =>
+
+      student.status === "Fail"
+
+  ).length;
+
+
+
+const topper =
+
+  students.reduce(
+
+    (top, student) =>
+
+      student.percentage >
+
+      top.percentage
+
+        ? student
+
+        : top,
+
+    students[0] || {}
+
+  );
+
 
 
 
@@ -219,85 +288,61 @@ function Dashboard() {
       </div>
 
 
-
-
-      {/* STATS */}
-
-      <div className="stats-grid">
+      <div className="analytics-grid">
 
 
 
-        <div className="stat-card">
+  <div className="analytics-card">
 
-          <h2>
+    <h3>Total Students</h3>
 
-            {students.length}
+    <p>{totalStudents}</p>
 
-          </h2>
-
-          <p>
-
-            Total Students
-
-          </p>
-
-        </div>
+  </div>
 
 
 
+  <div className="analytics-card">
 
-        <div className="stat-card">
+    <h3>Average %</h3>
 
-          <h2>
+    <p>{averagePercentage}%</p>
 
-            {
-
-              students.filter(
-                (s) =>
-                  s.status === "Pass"
-              ).length
-
-            }
-
-          </h2>
-
-          <p>
-
-            Passed Students
-
-          </p>
-
-        </div>
+  </div>
 
 
 
+  <div className="analytics-card">
 
-        <div className="stat-card">
+    <h3>Pass Students</h3>
 
-          <h2>
+    <p>{passCount}</p>
 
-            {
-
-              students.filter(
-                (s) =>
-                  s.status === "Fail"
-              ).length
-
-            }
-
-          </h2>
-
-          <p>
-
-            Failed Students
-
-          </p>
-
-        </div>
-
-      </div>
+  </div>
 
 
+
+  <div className="analytics-card">
+
+    <h3>Fail Students</h3>
+
+    <p>{failCount}</p>
+
+  </div>
+
+
+
+  <div className="analytics-card">
+
+    <h3>Topper</h3>
+
+    <p>{topper.name}</p>
+
+  </div>
+
+
+
+</div>
 
 
       {/* CHARTS */}

@@ -5,14 +5,10 @@ import { useNavigate } from "react-router-dom";
 import Calculator from "./Calculator";
 
 
-// import logo from "../assets/Logo.jpg";
 
 function Home() {
 
   const navigate = useNavigate();
-
-
-
 
   useEffect(() => {
 
