@@ -149,53 +149,53 @@ function Students() {
 
 
 
-const rankedStudents = [...students]
+  const rankedStudents = [...students]
 
-.sort((a, b) =>
-  b.percentage - a.percentage
-)
+    .sort((a, b) =>
+      b.percentage - a.percentage
+    )
 
-.map((student, index) => ({
+    .map((student, index) => ({
 
-  ...student,
+      ...student,
 
-  rank: index + 1,
+      rank: index + 1,
 
-}));
+    }));
 
 
 
-const sortedStudents = [...rankedStudents]
+  const sortedStudents = [...rankedStudents]
 
-.sort((a, b) => {
+    .sort((a, b) => {
 
-  if (sortType === "name") {
+      if (sortType === "name") {
 
-    return a.name.localeCompare(b.name);
+        return a.name.localeCompare(b.name);
 
-  }
+      }
 
-  if (sortType === "highest") {
+      if (sortType === "highest") {
 
-    return b.percentage - a.percentage;
+        return b.percentage - a.percentage;
 
-  }
+      }
 
-  if (sortType === "lowest") {
+      if (sortType === "lowest") {
 
-    return a.percentage - b.percentage;
+        return a.percentage - b.percentage;
 
-  }
+      }
 
-  if (sortType === "grade") {
+      if (sortType === "grade") {
 
-    return a.grade.localeCompare(b.grade);
+        return a.grade.localeCompare(b.grade);
 
-  }
+      }
 
-  return 0;
+      return 0;
 
-});
+    });
 
 
 
@@ -223,141 +223,182 @@ const sortedStudents = [...rankedStudents]
 
     try {
 
-      await fetch(
+      const res = await fetch(
+
         `https://student-grade-calculator-yu9q.onrender.com/api/update-student/${editData.id}/`,
+
         {
+
           method: "PUT",
 
           headers: {
+
             "Content-Type": "application/json",
+
           },
 
-          body: JSON.stringify(editData),
+          body: JSON.stringify({
+
+            ...editData,
+
+            subject1: Number(editData.subject1),
+
+            subject2: Number(editData.subject2),
+
+            subject3: Number(editData.subject3),
+
+            subject4: Number(editData.subject4),
+
+            subject5: Number(editData.subject5),
+
+          }),
+
         }
+
       );
 
 
 
-      setStudents(
-        students.map((student) =>
-          student.id === editData.id
-            ? editData
-            : student
-        )
-      );
+      const data = await res.json();
 
 
 
-      setShowEditPopup(false);
+      if (res.ok) {
+
+        await fetchStudents();
+
+        setShowEditPopup(false);
+
+      } else {
+
+        console.log(data.error);
+
+      }
 
     } catch (err) {
 
       console.log(err);
 
     }
+
   };
 
 
- const exportToExcel = () => {
-
-  const worksheet =
-    XLSX.utils.json_to_sheet(
-      students
-    );
 
 
+  const exportToExcel = () => {
 
-  const workbook =
-    XLSX.utils.book_new();
+    const worksheet =
+      XLSX.utils.json_to_sheet(
+        students
+      );
 
 
 
-  XLSX.utils.book_append_sheet(
-
-    workbook,
-
-    worksheet,
-
-    "Students"
-
-  );
+    const workbook =
+      XLSX.utils.book_new();
 
 
 
-  /* CENTER ALIGN ALL CELLS */
-
-  const range =
-    XLSX.utils.decode_range(
-      worksheet["!ref"]
-    );
-
-
-
-  for (
-
-    let row = range.s.r;
-
-    row <= range.e.r;
-
-    row++
-
-  ) {
-
-    for (
-
-      let col = range.s.c;
-
-      col <= range.e.c;
-
-      col++
-
-    ) {
-
-      const cellAddress =
-        XLSX.utils.encode_cell({
-          r: row,
-          c: col,
-        });
-
-
-
-      if (!worksheet[cellAddress]) {
-
-        continue;
-
-      }
-
-
-
-      worksheet[cellAddress].s = {
-
-        alignment: {
-
-          horizontal: "center",
-
-          vertical: "center",
-
-        },
-
-      };
-
-    }
-  }
-
-
-
-  const excelBuffer =
-    XLSX.write(
+    XLSX.utils.book_append_sheet(
 
       workbook,
 
+      worksheet,
+
+      "Students"
+
+    );
+
+
+
+    const range =
+      XLSX.utils.decode_range(
+        worksheet["!ref"]
+      );
+
+
+
+    for (
+
+      let row = range.s.r;
+
+      row <= range.e.r;
+
+      row++
+
+    ) {
+
+      for (
+
+        let col = range.s.c;
+
+        col <= range.e.c;
+
+        col++
+
+      ) {
+
+        const cellAddress =
+          XLSX.utils.encode_cell({
+            r: row,
+            c: col,
+          });
+
+
+
+        if (!worksheet[cellAddress]) {
+
+          continue;
+
+        }
+
+
+
+        worksheet[cellAddress].s = {
+
+          alignment: {
+
+            horizontal: "center",
+
+            vertical: "center",
+
+          },
+
+        };
+
+      }
+    }
+
+
+
+    const excelBuffer =
+      XLSX.write(
+
+        workbook,
+
+        {
+
+          bookType: "xlsx",
+
+          type: "array",
+
+          cellStyles: true,
+
+        }
+
+      );
+
+
+
+    const data = new Blob(
+
+      [excelBuffer],
+
       {
 
-        bookType: "xlsx",
-
-        type: "array",
-
-        cellStyles: true,
+        type:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
 
       }
 
@@ -365,29 +406,14 @@ const sortedStudents = [...rankedStudents]
 
 
 
-  const data = new Blob(
+    saveAs(
 
-    [excelBuffer],
+      data,
 
-    {
+      "students.xlsx"
 
-      type:
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
-
-    }
-
-  );
-
-
-
-  saveAs(
-
-    data,
-
-    "students.xlsx"
-
-  );
-};
+    );
+  };
 
 
 
@@ -403,56 +429,57 @@ const sortedStudents = [...rankedStudents]
 
 
 
-    <div className="table-top-bar">
+      <div className="table-top-bar">
 
-  <button
+        <button
 
-    className="excel-btn"
+          className="excel-btn"
 
-    onClick={exportToExcel}
-  >
+          onClick={exportToExcel}
+        >
 
-    Download Excel
+          Download Excel
 
-  </button>
+        </button>
 
 
 
-  <select
+        <select
 
-    value={sortType}
+          value={sortType}
 
-    onChange={(e) =>
-      setSortType(e.target.value)
-    }
+          onChange={(e) =>
+            setSortType(e.target.value)
+          }
 
-    className="sort-select"
-  >
+          className="sort-select"
+        >
 
-    <option value="">
-      Sort By
-    </option>
+          <option value="">
+            Sort By
+          </option>
 
-    <option value="name">
-      Name
-    </option>
+          <option value="name">
+            Name
+          </option>
 
-    <option value="highest">
-      Highest %
-    </option>
+          <option value="highest">
+            Highest %
+          </option>
 
-    <option value="lowest">
-      Lowest %
-    </option>
+          <option value="lowest">
+            Lowest %
+          </option>
 
-    <option value="grade">
-      Grade
-    </option>
+          <option value="grade">
+            Grade
+          </option>
 
-  </select>
+        </select>
 
-</div>
-      
+      </div>
+
+
 
 
       <table>
@@ -490,16 +517,19 @@ const sortedStudents = [...rankedStudents]
 
           {currentStudents.map((student) => (
 
-            <tr key={student.id}  className={
-                  student.rank === 1
-                    ? "topper-row"
-                    : ""
-                }>
+            <tr
+              key={student.id}
 
+              className={
+                student.rank === 1
+                  ? "topper-row"
+                  : ""
+              }
+            >
 
               <td>
 
-                  #{student.rank}
+                #{student.rank}
 
               </td>
 
