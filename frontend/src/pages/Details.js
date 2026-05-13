@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-
-import { useNavigate } from "react-router-dom";
-
 import jsPDF from "jspdf";
 
 function Students() {
@@ -14,27 +11,24 @@ function Students() {
 
   const [sortType, setSortType] = useState("");
 
-  const navigate = useNavigate();
+  const [showEditPopup, setShowEditPopup] =
+    useState(false);
 
-  const [showEditPopup, setShowEditPopup] = useState(false);
+  const [showDeletePopup, setShowDeletePopup] =
+    useState(false);
+
+  const [deleteId, setDeleteId] =
+    useState(null);
 
   const [editData, setEditData] = useState({
-
-  id: "",
-
-  name: "",
-
-  subject1: "",
-
-  subject2: "",
-
-  subject3: "",
-
-  subject4: "",
-
-  subject5: "",
-
-});
+    id: "",
+    name: "",
+    subject1: "",
+    subject2: "",
+    subject3: "",
+    subject4: "",
+    subject5: "",
+  });
 
 
 
@@ -69,34 +63,40 @@ function Students() {
 
 
 
-    const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
 
-  try {
+    try {
 
-    await fetch(
+      await fetch(
+        `https://student-grade-calculator-yu9q.onrender.com/api/delete-student/${id}/`,
+        {
+          method: "DELETE",
+        }
+      );
 
-      `https://student-grade-calculator-yu9q.onrender.com/api/delete-student/${id}/`,
+      setStudents(
+        students.filter(
+          (student) => student.id !== id
+        )
+      );
 
-      {
-        method: "DELETE",
-      }
-    );
+    } catch (err) {
+
+      console.log(err);
+
+    }
+  };
 
 
 
-    setStudents(
+  const deleteStudent = async () => {
 
-      students.filter(
-        (student) => student.id !== id
-      )
-    );
+    await handleDelete(deleteId);
 
-  } catch (err) {
+    setShowDeletePopup(false);
 
-    console.log(err);
-
-  }
-};
+    setDeleteId(null);
+  };
 
 
 
@@ -144,97 +144,99 @@ function Students() {
     doc.save(`${student.name}-result.pdf`);
   };
 
-  const sortedStudents = [...students].sort((a, b) => {
-    
-  if (sortType === "name") {
 
-    return a.name.localeCompare(b.name);
 
-  }
 
-  if (sortType === "highest") {
+  const sortedStudents =
+    [...students].sort((a, b) => {
 
-    return b.percentage - a.percentage;
+      if (sortType === "name") {
 
-  }
+        return a.name.localeCompare(b.name);
 
-  if (sortType === "lowest") {
+      }
 
-    return a.percentage - b.percentage;
+      if (sortType === "highest") {
 
-  }
+        return b.percentage - a.percentage;
 
-  if (sortType === "grade") {
+      }
 
-    return a.grade.localeCompare(b.grade);
+      if (sortType === "lowest") {
 
-  }
+        return a.percentage - b.percentage;
 
-  
+      }
 
-  return 0;
-});
+      if (sortType === "grade") {
 
-const indexOfLastStudent =
-  currentPage * studentsPerPage;
+        return a.grade.localeCompare(b.grade);
 
-const indexOfFirstStudent =
-  indexOfLastStudent - studentsPerPage;
+      }
 
-const currentStudents =
-  sortedStudents.slice(
-    indexOfFirstStudent,
-    indexOfLastStudent
+      return 0;
+    });
+
+
+
+
+  const indexOfLastStudent =
+    currentPage * studentsPerPage;
+
+  const indexOfFirstStudent =
+    indexOfLastStudent - studentsPerPage;
+
+  const currentStudents =
+    sortedStudents.slice(
+      indexOfFirstStudent,
+      indexOfLastStudent
+    );
+
+  const totalPages = Math.ceil(
+    sortedStudents.length / studentsPerPage
   );
 
-const totalPages = Math.ceil(
-  sortedStudents.length / studentsPerPage
-);
-
-const updateStudent = async () => {
-
-  try {
-
-    await fetch(
-
-      `https://student-grade-calculator-yu9q.onrender.com/api/update-student/${editData.id}/`,
-
-      {
-
-        method: "PUT",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(editData),
-      }
-    );
 
 
 
-    setStudents(
+  const updateStudent = async () => {
 
-      students.map((student) =>
+    try {
 
-        student.id === editData.id
+      await fetch(
+        `https://student-grade-calculator-yu9q.onrender.com/api/update-student/${editData.id}/`,
+        {
+          method: "PUT",
 
-          ? editData
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-          : student
-      )
-    );
+          body: JSON.stringify(editData),
+        }
+      );
 
 
 
-    setShowEditPopup(false);
+      setStudents(
+        students.map((student) =>
+          student.id === editData.id
+            ? editData
+            : student
+        )
+      );
 
-  } catch (err) {
 
-    console.log(err);
 
-  }
-};
+      setShowEditPopup(false);
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+  };
+
 
 
 
@@ -248,38 +250,42 @@ const updateStudent = async () => {
 
       </h1>
 
+
+
       <div className="sort-box">
 
-  <select
-    value={sortType}
-    onChange={(e) =>
-      setSortType(e.target.value)
-    }
-  >
+        <select
+          value={sortType}
 
-    <option value="">
-      Sort By
-    </option>
+          onChange={(e) =>
+            setSortType(e.target.value)
+          }
+        >
 
-    <option value="name">
-      Name
-    </option>
+          <option value="">
+            Sort By
+          </option>
 
-    <option value="highest">
-      Highest Percentage
-    </option>
+          <option value="name">
+            Name
+          </option>
 
-    <option value="lowest">
-      Lowest Percentage
-    </option>
+          <option value="highest">
+            Highest Percentage
+          </option>
 
-    <option value="grade">
-      Grade
-    </option>
+          <option value="lowest">
+            Lowest Percentage
+          </option>
 
-  </select>
+          <option value="grade">
+            Grade
+          </option>
 
-</div>
+        </select>
+
+      </div>
+
 
 
 
@@ -311,6 +317,7 @@ const updateStudent = async () => {
 
 
 
+
         <tbody>
 
           {currentStudents.map((student) => (
@@ -331,35 +338,35 @@ const updateStudent = async () => {
 
 
 
-              {/* EDIT BUTTON */}
 
-                <td>
+              <td>
 
-                      <button
-                        className="edit-btn"
+                <button
+                  className="edit-btn"
 
-                        onClick={() => {
+                  onClick={() => {
 
-                          setEditData(student);
+                    setEditData(student);
 
-                          setShowEditPopup(true);
+                    setShowEditPopup(true);
 
-                        }}
-                      >
+                  }}
+                >
 
-                        Edit Details
+                  Edit Details
 
-                      </button>
+                </button>
 
-                </td>
+              </td>
 
 
-              {/* PDF BUTTON */}
+
 
               <td>
 
                 <button
                   className="pdf-btn"
+
                   onClick={() =>
                     downloadPDF(student)
                   }
@@ -373,31 +380,22 @@ const updateStudent = async () => {
 
 
 
-              {/* DELETE BUTTON */}
 
               <td>
 
                 <button
                   className="delete-btn"
-                        onClick={() => {
 
-                          const confirmDelete =
-                            window.confirm(
-                              "Are you sure you want to delete this student?"
-                            );
+                  onClick={() => {
 
+                    setDeleteId(student.id);
 
+                    setShowDeletePopup(true);
 
-                          if (confirmDelete) {
-
-                            handleDelete(student.id);
-
-                          }
-
-                        }}
+                  }}
                 >
 
-                  Delete Student
+                  Delete
 
                 </button>
 
@@ -411,161 +409,241 @@ const updateStudent = async () => {
 
       </table>
 
+
+
+
       <div className="pagination">
 
-  <button
+        <button
 
-    disabled={currentPage === 1}
+          disabled={currentPage === 1}
 
-    onClick={() =>
-      setCurrentPage(currentPage - 1)
-    }
-  >
+          onClick={() =>
+            setCurrentPage(currentPage - 1)
+          }
+        >
 
-    Prev
+          Prev
 
-  </button>
-
-
-
-  <span>
-
-    Page {currentPage} of {totalPages}
-
-  </span>
+        </button>
 
 
 
-  <button
 
-    disabled={currentPage === totalPages}
+        <span>
 
-    onClick={() =>
-      setCurrentPage(currentPage + 1)
-    }
-  >
+          Page {currentPage} of {totalPages}
 
-    Next
+        </span>
 
-  </button>
 
-</div>
 
-        {showEditPopup && (
 
-  <div className="popup-overlay">
+        <button
 
-    <div className="popup">
+          disabled={currentPage === totalPages}
 
-      <h2>Edit Student</h2>
+          onClick={() =>
+            setCurrentPage(currentPage + 1)
+          }
+        >
 
-      <input
-        type="text"
+          Next
 
-        value={editData.name}
+        </button>
 
-        onChange={(e) =>
-          setEditData({
-            ...editData,
-            name: e.target.value
-          })
-        }
-      />
+      </div>
 
-      <input
-        type="number"
 
-        value={editData.subject1}
 
-        onChange={(e) =>
-          setEditData({
-            ...editData,
-            subject1: e.target.value
-          })
-        }
-      />
 
-      <input
-        type="number"
+      {showDeletePopup && (
 
-        value={editData.subject2}
+        <div className="popup-overlay">
 
-        onChange={(e) =>
-          setEditData({
-            ...editData,
-            subject2: e.target.value
-          })
-        }
-      />
+          <div className="popup">
 
-      <input
-        type="number"
+            <h3>
+              Delete this student?
+            </h3>
 
-        value={editData.subject3}
+            <div className="popup-buttons">
 
-        onChange={(e) =>
-          setEditData({
-            ...editData,
-            subject3: e.target.value
-          })
-        }
-      />
+              <button
+                className="cancel-btn"
 
-      <input
-        type="number"
+                onClick={() =>
+                  setShowDeletePopup(false)
+                }
+              >
 
-        value={editData.subject4}
+                Cancel
 
-        onChange={(e) =>
-          setEditData({
-            ...editData,
-            subject4: e.target.value
-          })
-        }
-      />
+              </button>
 
-      <input
-        type="number"
 
-        value={editData.subject5}
 
-        onChange={(e) =>
-          setEditData({
-            ...editData,
-            subject5: e.target.value
-          })
-        }
-      />
 
-      <button
-        className="save-btn"
+              <button
+                className="confirm-delete-btn"
 
-        onClick={updateStudent}
-      >
+                onClick={deleteStudent}
+              >
 
-        Save
+                Delete
 
-      </button>
+              </button>
 
-      <button
-        className="cancel-btn"
+            </div>
 
-        onClick={() =>
-          setShowEditPopup(false)
-        }
-      >
+          </div>
 
-        Cancel
+        </div>
 
-      </button>
+      )}
+
+
+
+
+      {showEditPopup && (
+
+        <div className="popup-overlay">
+
+          <div className="popup">
+
+            <h2>Edit Student</h2>
+
+
+
+
+            <input
+              type="text"
+
+              value={editData.name}
+
+              onChange={(e) =>
+                setEditData({
+                  ...editData,
+                  name: e.target.value
+                })
+              }
+            />
+
+
+
+
+            <input
+              type="number"
+
+              value={editData.subject1}
+
+              onChange={(e) =>
+                setEditData({
+                  ...editData,
+                  subject1: e.target.value
+                })
+              }
+            />
+
+
+
+
+            <input
+              type="number"
+
+              value={editData.subject2}
+
+              onChange={(e) =>
+                setEditData({
+                  ...editData,
+                  subject2: e.target.value
+                })
+              }
+            />
+
+
+
+
+            <input
+              type="number"
+
+              value={editData.subject3}
+
+              onChange={(e) =>
+                setEditData({
+                  ...editData,
+                  subject3: e.target.value
+                })
+              }
+            />
+
+
+
+
+            <input
+              type="number"
+
+              value={editData.subject4}
+
+              onChange={(e) =>
+                setEditData({
+                  ...editData,
+                  subject4: e.target.value
+                })
+              }
+            />
+
+
+
+
+            <input
+              type="number"
+
+              value={editData.subject5}
+
+              onChange={(e) =>
+                setEditData({
+                  ...editData,
+                  subject5: e.target.value
+                })
+              }
+            />
+
+
+
+
+            <button
+              className="save-btn"
+
+              onClick={updateStudent}
+            >
+
+              Save
+
+            </button>
+
+
+
+
+            <button
+              className="cancel-btn"
+
+              onClick={() =>
+                setShowEditPopup(false)
+              }
+            >
+
+              Cancel
+
+            </button>
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
-
-  </div>
-
-)}
-    </div>
-
   );
 }
 

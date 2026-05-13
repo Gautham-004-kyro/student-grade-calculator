@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
+
+
 function Calculator() {
 
 
@@ -216,104 +218,41 @@ function Calculator() {
 
       )}
 
-
-
       {result && (
-
         <div
-          className="result-side"
+          className="result"
           ref={resultRef}
         >
+          <h3>{result.name}</h3>
 
-          <h2
-            style={{
-              fontSize: "32px",
-              marginBottom: "25px"
-            }}
-          >
+          <p>Total: {result.total}</p>
 
-            {result.name}
+          <p>
+            Percentage: {result.percentage}%
+          </p>
 
-          </h2>
+          <p>Grade: {result.grade}</p>
 
-
-
-          <div className="result-grid">
-
-            <div>
-
-              <span>Total :</span>
-
-              <strong>
-
-                {result.total}
-
-              </strong>
-
-            </div>
-
-
-
-            <div>
-
-              <span>Percentage :</span>
-
-              <strong>
-
-                {result.percentage}%
-
-              </strong>
-
-            </div>
-
-
-
-            <div>
-
-              <span>Grade :</span>
-
-              <strong>
-
-                {result.grade}
-
-              </strong>
-
-            </div>
-
-
-
-            <div>
-
-              <span>Status :</span>
-
-              <strong>
-
-                {result.status}
-
-              </strong>
-
-            </div>
-
-          </div>
-
-
+          <p>Status: {result.status}</p>
 
           <button
             className="pdf-btn"
             onClick={downloadPDF}
           >
-
             Download PDF
-
           </button>
-
         </div>
-
       )}
 
-    </div>
 
+      
+
+    </div>
   );
 }
 
 export default Calculator;
+
+
+
+      

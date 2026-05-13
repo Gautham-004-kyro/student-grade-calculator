@@ -448,3 +448,102 @@ th {
     text-align: center;
   }
 }
+
+/* POPUP */
+
+.popup-overlay {
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+}
+
+.popup {
+
+  width: 400px;
+
+  padding: 25px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.12);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+  text-align: center;
+}
+
+.popup h2,
+.popup h3 {
+
+  color: white;
+
+  margin-bottom: 20px;
+}
+
+.popup input {
+
+  margin-bottom: 12px;
+}
+
+.popup-buttons {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.save-btn {
+
+  background: linear-gradient(
+    45deg,
+    #00e676,
+    #00c853
+  );
+
+  color: white;
+}
+
+.cancel-btn {
+
+  background: linear-gradient(
+    45deg,
+    #757575,
+    #424242
+  );
+
+  color: white;
+}
+
+.confirm-delete-btn {
+
+  background: linear-gradient(
+    45deg,
+    #ff4d4d,
+    #ff1f1f
+  );
+
+  color: white;
+}
