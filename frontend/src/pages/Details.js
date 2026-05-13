@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 function Students() {
 
@@ -256,55 +258,201 @@ const sortedStudents = [...rankedStudents]
   };
 
 
+ const exportToExcel = () => {
+
+  const worksheet =
+    XLSX.utils.json_to_sheet(
+      students
+    );
+
+
+
+  const workbook =
+    XLSX.utils.book_new();
+
+
+
+  XLSX.utils.book_append_sheet(
+
+    workbook,
+
+    worksheet,
+
+    "Students"
+
+  );
+
+
+
+  /* CENTER ALIGN ALL CELLS */
+
+  const range =
+    XLSX.utils.decode_range(
+      worksheet["!ref"]
+    );
+
+
+
+  for (
+
+    let row = range.s.r;
+
+    row <= range.e.r;
+
+    row++
+
+  ) {
+
+    for (
+
+      let col = range.s.c;
+
+      col <= range.e.c;
+
+      col++
+
+    ) {
+
+      const cellAddress =
+        XLSX.utils.encode_cell({
+          r: row,
+          c: col,
+        });
+
+
+
+      if (!worksheet[cellAddress]) {
+
+        continue;
+
+      }
+
+
+
+      worksheet[cellAddress].s = {
+
+        alignment: {
+
+          horizontal: "center",
+
+          vertical: "center",
+
+        },
+
+      };
+
+    }
+  }
+
+
+
+  const excelBuffer =
+    XLSX.write(
+
+      workbook,
+
+      {
+
+        bookType: "xlsx",
+
+        type: "array",
+
+        cellStyles: true,
+
+      }
+
+    );
+
+
+
+  const data = new Blob(
+
+    [excelBuffer],
+
+    {
+
+      type:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+
+    }
+
+  );
+
+
+
+  saveAs(
+
+    data,
+
+    "students.xlsx"
+
+  );
+};
+
 
 
   return (
 
     <div className="table-container">
 
-      <h1 className="title">
+      <h1 className="details-title">
 
-        Student Details
+        Students Details
 
       </h1>
 
 
 
-      <div className="sort-box">
+    <div className="table-top-bar">
 
-        <select
-          value={sortType}
+  <button
 
-          onChange={(e) =>
-            setSortType(e.target.value)
-          }
-        >
+    className="excel-btn"
 
-          <option value="">
-            Sort By
-          </option>
+    onClick={exportToExcel}
+  >
 
-          <option value="name">
-            Name
-          </option>
+    Download Excel
 
-          <option value="highest">
-            Highest Percentage
-          </option>
-
-          <option value="lowest">
-            Lowest Percentage
-          </option>
-
-          <option value="grade">
-            Grade
-          </option>
-
-        </select>
-
-      </div>
+  </button>
 
 
+
+  <select
+
+    value={sortType}
+
+    onChange={(e) =>
+      setSortType(e.target.value)
+    }
+
+    className="sort-select"
+  >
+
+    <option value="">
+      Sort By
+    </option>
+
+    <option value="name">
+      Name
+    </option>
+
+    <option value="highest">
+      Highest %
+    </option>
+
+    <option value="lowest">
+      Lowest %
+    </option>
+
+    <option value="grade">
+      Grade
+    </option>
+
+  </select>
+
+</div>
+      
 
 
       <table>
