@@ -1,6 +1,6 @@
 from django.db import models
 class Student(models.Model):
-    name = models.CharField(max_length=100) 
+    name = models.CharField(max_length=100, unique=True) 
     subject1 = models.IntegerField()
     subject2 = models.IntegerField()
     subject3 = models.IntegerField()
