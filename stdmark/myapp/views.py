@@ -290,108 +290,105 @@ def update_student(request, id):
 
     if request.method == "PUT":
 
-        try:
+        data = json.loads(request.body)
 
-            student = Student.objects.get(id=id)
-
-            data = json.loads(request.body)
+        student =Student.objects.get(id=id)
 
 
 
-            student.name = data.get("name")
+        student.name =data["name"]
 
-            student.subject1 = data.get("subject1")
+        student.subject1 =data["subject1"]
 
-            student.subject2 = data.get("subject2")
+        student.subject2 =data["subject2"]
 
-            student.subject3 = data.get("subject3")
+        student.subject3 =data["subject3"]
 
-            student.subject4 = data.get("subject4")
+        student.subject4 = data["subject4"]
 
-            student.subject5 = data.get("subject5")
-
-
-
-            total = (
-
-                student.subject1 +
-                student.subject2 +
-                student.subject3 +
-                student.subject4 +
-                student.subject5
-
-            )
+        student.subject5 = data["subject5"]
 
 
 
-            percentage = total / 5
+        total = (
+
+            student.subject1 +
+
+            student.subject2 +
+
+            student.subject3 +
+
+            student.subject4 +
+
+            student.subject5
+
+        )
 
 
 
-            if percentage >= 90:
-                grade = "A"
-
-            elif percentage >= 75:
-                grade = "B"
-
-            elif percentage >= 60:
-                grade = "C"
-
-            elif percentage >= 50:
-                grade = "D"
-
-            else:
-                grade = "F"
+        percentage =total / 5
 
 
 
-            status = (
-                "Pass"
-                if percentage >= 50
-                else "Fail"
-            )
+        student.total =total
+
+        student.percentage =percentage
 
 
 
-            student.total = total
+        if percentage >= 90:
 
-            student.percentage = percentage
+            student.grade = "A"
 
-            student.grade = grade
+        elif percentage >= 75:
 
-            student.status = status
+            student.grade = "B"
+
+        elif percentage >= 60:
+
+            student.grade = "C"
+
+        elif percentage >= 50:
+
+            student.grade = "D"
+
+        else:
+
+            student.grade = "F"
 
 
 
-            student.save()
+        student.status = (
+
+            "Pass"
+
+            if percentage >= 50
+
+            else "Fail"
+
+        )
 
 
 
-            return JsonResponse({
-
-                "message": "Student updated"
-
-            })
+        student.save()
 
 
 
-        except Student.DoesNotExist:
+        return JsonResponse({
 
-            return JsonResponse({
+            "message":
+            "Student updated"
 
-                "error": "Student not found"
-
-            }, status=404)
+        })
 
 
 
     return JsonResponse({
 
-        "error": "Invalid request"
+        "error":
+        "Only PUT allowed"
 
-    }, status=400)
-
-
+    })
 @csrf_exempt
 def delete_student(request, student_id):
 
