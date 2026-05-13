@@ -147,35 +147,53 @@ function Students() {
 
 
 
-  const sortedStudents =
-    [...students].sort((a, b) => {
+const rankedStudents = [...students]
 
-      if (sortType === "name") {
+.sort((a, b) =>
+  b.percentage - a.percentage
+)
 
-        return a.name.localeCompare(b.name);
+.map((student, index) => ({
 
-      }
+  ...student,
 
-      if (sortType === "highest") {
+  rank: index + 1,
 
-        return b.percentage - a.percentage;
+}));
 
-      }
 
-      if (sortType === "lowest") {
 
-        return a.percentage - b.percentage;
+const sortedStudents = [...rankedStudents]
 
-      }
+.sort((a, b) => {
 
-      if (sortType === "grade") {
+  if (sortType === "name") {
 
-        return a.grade.localeCompare(b.grade);
+    return a.name.localeCompare(b.name);
 
-      }
+  }
 
-      return 0;
-    });
+  if (sortType === "highest") {
+
+    return b.percentage - a.percentage;
+
+  }
+
+  if (sortType === "lowest") {
+
+    return a.percentage - b.percentage;
+
+  }
+
+  if (sortType === "grade") {
+
+    return a.grade.localeCompare(b.grade);
+
+  }
+
+  return 0;
+
+});
 
 
 
@@ -295,6 +313,8 @@ function Students() {
 
           <tr>
 
+            <th>Rank</th>
+
             <th>Name</th>
 
             <th>Total</th>
@@ -322,7 +342,18 @@ function Students() {
 
           {currentStudents.map((student) => (
 
-            <tr key={student.id}>
+            <tr key={student.id}  className={
+                  student.rank === 1
+                    ? "topper-row"
+                    : ""
+                }>
+
+
+              <td>
+
+                  #{student.rank}
+
+              </td>
 
               <td>{student.name}</td>
 

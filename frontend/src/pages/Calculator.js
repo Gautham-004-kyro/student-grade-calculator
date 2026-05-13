@@ -2,10 +2,7 @@ import { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-
-
 function Calculator() {
-
 
   const resultRef = useRef();
 
@@ -218,41 +215,51 @@ function Calculator() {
 
       )}
 
+
+
       {result && (
-        <div
-          className="result"
-          ref={resultRef}
-        >
-          <h3>{result.name}</h3>
 
-          <p>Total: {result.total}</p>
+        <div className="popup-overlay">
 
-          <p>
-            Percentage: {result.percentage}%
-          </p>
-
-          <p>Grade: {result.grade}</p>
-
-          <p>Status: {result.status}</p>
-
-          <button
-            className="pdf-btn"
-            onClick={downloadPDF}
+          <div
+            className="popup result"
+            ref={resultRef}
           >
-            Download PDF
-          </button>
+
+            <h3>{result.name}</h3>
+
+            <p>Total: {result.total}</p>
+
+            <p>
+              Percentage: {result.percentage}%
+            </p>
+
+            <p>Grade: {result.grade}</p>
+
+            <p>Status: {result.status}</p>
+
+            <button
+              className="pdf-btn"
+              onClick={downloadPDF}
+            >
+              Download PDF
+            </button>
+
+            <button
+              className="cancel-btn"
+              onClick={() => setResult(null)}
+            >
+              Close
+            </button>
+
+          </div>
+
         </div>
+
       )}
-
-
-      
 
     </div>
   );
 }
 
 export default Calculator;
-
-
-
-      
