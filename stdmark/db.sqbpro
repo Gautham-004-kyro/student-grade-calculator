@@ -1,13 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="db.sqlite3" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="pragmas query browser structure" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2936"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="myapp_student" custom_title="0" dock_id="1" table="4,13:mainmyapp_student"/><dock_state state="000000ff00000000fd000000010000000200000460000002ecfc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000004600000010f00ffffff000002450000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="auth_group" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="25"/><column index="2" value="34"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="myapp_student" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="25"/><column index="2" value="148"/><column index="3" value="47"/><column index="4" value="47"/><column index="5" value="47"/><column index="6" value="47"/><column index="7" value="47"/><column index="8" value="31"/><column index="9" value="59"/><column index="10" value="34"/><column index="11" value="39"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">INSERT INTO myapp_student
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="db.sqlite3" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="pragmas query browser structure" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2872"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="myapp_student" custom_title="0" dock_id="1" table="4,13:mainmyapp_student"/><dock_state state="000000ff00000000fd0000000100000002000003db00000368fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000003db0000012300ffffff000002850000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="auth_group" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="35"/><column index="2" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="myapp_student" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="35"/><column index="2" value="151"/><column index="3" value="57"/><column index="4" value="57"/><column index="5" value="57"/><column index="6" value="57"/><column index="7" value="57"/><column index="8" value="35"/><column index="9" value="73"/><column index="10" value="41"/><column index="11" value="44"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">INSERT INTO myapp_student
 (name, subject1, subject2, subject3, subject4, subject5, total, percentage, grade, status)
+
 VALUES
-('Rahul',95,88,91,85,94,453,90.6,'A','Pass'),
-('Akhil',78,82,75,80,77,392,78.4,'B','Pass'),
-('Meera',65,70,68,72,66,341,68.2,'C','Pass'),
-('Anjali',92,95,89,90,94,460,92.0,'A','Pass'),
-('Vishnu',45,52,48,50,47,242,48.4,'F','Fail'),
-('Arjun',84,79,88,81,86,418,83.6,'B','Pass'),
-('Sneha',98,96,99,97,95,485,97.0,'A','Pass'),
-('Nithin',58,62,60,55,59,294,58.8,'D','Pass'),
-('Diya',73,76,71,75,78,373,74.6,'C','Pass'),
-('Adithya',88,90,85,87,89,439,87.8,'B','Pass');</sql><current_tab id="0"/></tab_sql></sqlb_project>
+
+('Arjun', 95, 91, 89, 94, 92, 461, 92.2, 'A', 'Pass'),
+
+('Rahul', 78, 82, 80, 76, 79, 395, 79.0, 'B', 'Pass'),
+
+('Sneha', 88, 90, 85, 91, 87, 441, 88.2, 'B', 'Pass'),
+
+('Akhil', 65, 70, 68, 72, 66, 341, 68.2, 'C', 'Pass'),
+
+('Meera', 92, 95, 94, 90, 93, 464, 92.8, 'A', 'Pass'),
+
+('Vishnu', 55, 60, 58, 52, 57, 282, 56.4, 'D', 'Pass'),
+
+('Anjali', 85, 88, 84, 86, 89, 432, 86.4, 'B', 'Pass'),
+
+('Kiran', 47, 45, 50, 42, 48, 232, 46.4, 'F', 'Fail'),
+
+('Nikhil', 73, 75, 71, 70, 74, 363, 72.6, 'C', 'Pass'),
+
+('Devika', 98, 97, 99, 96, 98, 488, 97.6, 'A', 'Pass'),
+
+('Adithya', 81, 79, 84, 82, 80, 406, 81.2, 'B', 'Pass'),
+
+('Gokul', 62, 64, 60, 58, 61, 305, 61.0, 'C', 'Pass'),
+
+('Farhan', 45, 49, 40, 44, 42, 220, 44.0, 'F', 'Fail'),
+
+('Lakshmi', 89, 92, 90, 91, 88, 450, 90.0, 'A', 'Pass'),
+
+('Hari', 77, 74, 79, 81, 76, 387, 77.4, 'B', 'Pass'),
+
+('Neha', 69, 72, 71, 68, 70, 350, 70.0, 'C', 'Pass'),
+
+('Abhinav', 58, 55, 60, 57, 56, 286, 57.2, 'D', 'Pass'),
+
+('Pooja', 93, 91, 94, 92, 95, 465, 93.0, 'A', 'Pass'),
+
+('Rithik', 83, 85, 80, 82, 84, 414, 82.8, 'B', 'Pass'),
+
+('Sandra', 52, 50, 55, 53, 54, 264, 52.8, 'D', 'Pass');
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
