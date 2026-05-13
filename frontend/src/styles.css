@@ -75,6 +75,49 @@ label {
   font-size: 18px;
 }
 
+
+.login-page,
+.register-page {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.login-container,
+.register-container {
+
+  padding: 35px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.12);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+  text-align: center;
+}
+
+.login-container {
+
+  width: 420px;
+}
+
+.register-container {
+
+  width: 430px;
+}
+
 /* MAIN LAYOUT */
 
 .main-layout {
