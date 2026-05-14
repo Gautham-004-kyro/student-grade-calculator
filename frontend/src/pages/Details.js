@@ -570,9 +570,8 @@ function Students() {
 
             <tr
               key={student.id}
-
               className={
-                student.rank === 1
+                !search && student.rank === 1
                   ? "topper-row"
                   : ""
               }
@@ -580,7 +579,7 @@ function Students() {
 
               <td>
 
-                {search ? "-" : `#${student.rank}`}
+                {`#${student.rank}`}
 
               </td>
 
