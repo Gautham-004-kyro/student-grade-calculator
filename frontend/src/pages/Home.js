@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Calculator from "./Calculator";
 
+import { toast } from "react-toastify";
 
 
 function Home() {
@@ -41,10 +42,12 @@ function Home() {
       localStorage.removeItem("loggedIn");
 
       navigate("/");
-
+      toast.success("Logged out successfully!");
     } catch (err) {
-
-      console.log(err);
+      toast.error("Logout failed!");
+      console.error(err);
+    }
+      
 
     }
   };
