@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 //import logo from "../assets/Logo.jpg";
 
@@ -231,29 +232,16 @@ const topper =
 
 
             <button
-
               className="logout-btn"
-
               onClick={() => {
-
                 toast.success("Logged out successfully!");
-
-
-
                 setTimeout(() => {
-
                   navigate("/");
-
                 }, 1000);
-
               }}
-
             >
-
-                    Logout
-
+              Logout
             </button>
-                            
         </div>
 
       </header>
