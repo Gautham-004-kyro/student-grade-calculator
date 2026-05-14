@@ -702,3 +702,559 @@ th {
 
   max-height: 450px;
 }
+
+/* MOBILE RESPONSIVE FIXES */
+
+@media screen and (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 28px;
+
+    text-align: center;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 14px;
+
+    padding: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+    padding: 8px 10px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .popup input {
+
+    width: 100%;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    font-size: 12px;
+
+  }
+
+}/* MOBILE RESPONSIVE FIXES */
+
+@media screen and (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 28px;
+
+    text-align: center;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 14px;
+
+    padding: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+    padding: 8px 10px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .popup input {
+
+    width: 100%;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    font-size: 12px;
+
+  }
+
+}/* MOBILE RESPONSIVE FIXES */
+
+@media screen and (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 28px;
+
+    text-align: center;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 14px;
+
+    padding: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+    padding: 8px 10px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .popup input {
+
+    width: 100%;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    font-size: 12px;
+
+  }
+
+}/* MOBILE RESPONSIVE FIXES */
+
+@media (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding: 15px;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    text-align: center;
+
+    font-size: 28px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+  }
+
+}
+
+
+
+
+@media (max-width: 480px) {
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+}
