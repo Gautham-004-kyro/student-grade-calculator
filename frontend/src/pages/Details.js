@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { toast } from "react-toastify";
 
 function Students() {
 
@@ -57,6 +58,8 @@ function Students() {
 
     } catch (err) {
 
+      toast.error("Something went wrong!");
+
       console.log(err);
 
     }
@@ -83,6 +86,7 @@ function Students() {
       );
 
     } catch (err) {
+      toast.error("Failed to delete student!");
 
       console.log(err);
 
@@ -265,17 +269,21 @@ function Students() {
 
       if (res.ok) {
 
+        toast.success("Student details updated successfully!");
+
         await fetchStudents();
 
         setShowEditPopup(false);
 
       } else {
-
+        toast.error(data.error || "Failed to update student details!");
         console.log(data.error);
 
       }
 
     } catch (err) {
+
+      toast.error("Server not reachable!");
 
       console.log(err);
 

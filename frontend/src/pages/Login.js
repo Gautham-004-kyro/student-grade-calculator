@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 
 
 function Login() {
@@ -80,12 +82,14 @@ function Login() {
 
       if (res.ok) {
 
+        toast.success("Login successful!");
+
         localStorage.setItem("loggedIn", "true");
 
         navigate("/home");
 
       } else {
-
+        toast.error("Invalid credentials!"); 
         setError(data.error || "Login failed");
 
       }

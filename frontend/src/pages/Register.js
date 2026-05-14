@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Register() {
 
@@ -145,10 +146,13 @@ function Register() {
 
 
       if (registerRes.ok) {
+        toast.success("Account created successfully! Please login.");
 
         setShowPopup(true);
 
       } else {
+
+        toast.error(registerData.error || "Registration failed!");
 
         setError(registerData.error);
 
