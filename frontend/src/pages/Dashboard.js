@@ -230,18 +230,30 @@ const topper =
 
 
 
-          <button
-            className="logout-btn"
-            onClick={() =>
-              navigate("/")
-            }
+            <button
 
-          > 
-         
-            Logout
+              className="logout-btn"
 
-          </button>
+              onClick={() => {
 
+                toast.success("Logged out successfully!");
+
+
+
+                setTimeout(() => {
+
+                  navigate("/");
+
+                }, 1000);
+
+              }}
+
+            >
+
+                    Logout
+
+            </button>
+                            
         </div>
 
       </header>
