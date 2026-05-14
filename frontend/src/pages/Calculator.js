@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { toast } from "react-toastify";
 
 function Calculator() {
 
@@ -68,15 +69,21 @@ function Calculator() {
 
 
       if (res.ok) {
+        
+        toast.success("Result calculated successfully!");
 
         setResult(data);
 
       } else {
 
+        toast.error(data.error || "Failed to calculate result!");
+
         setError(data.error || "Something went wrong");
       }
 
     } catch (err) {
+
+      toast.error("Server not reachable!");
 
       console.error(err);
 

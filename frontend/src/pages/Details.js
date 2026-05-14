@@ -102,6 +102,8 @@ function Students() {
     setShowDeletePopup(false);
 
     setDeleteId(null);
+
+    toast.success("Student deleted successfully!");
   };
 
 
