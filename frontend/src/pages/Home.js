@@ -47,9 +47,6 @@ function Home() {
       toast.error("Logout failed!");
       console.error(err);
     }
-      
-
-    }
   };
 
 
