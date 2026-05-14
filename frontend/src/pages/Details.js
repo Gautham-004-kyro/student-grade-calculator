@@ -179,19 +179,27 @@ function Students() {
 );
 
 
-  const rankedStudents = [...students]
+  const rankedStudents = search
 
-    .sort((a, b) =>
-      b.percentage - a.percentage
-    )
+  ? filteredStudents
 
-    .map((student, index) => ({
+  : [...filteredStudents]
 
-      ...student,
+      .sort(
 
-      rank: index + 1,
+        (a, b) =>
 
-    }));
+          b.percentage - a.percentage
+
+      )
+
+      .map((student, index) => ({
+
+        ...student,
+
+        rank: index + 1,
+
+      }));
 
 
 
@@ -577,7 +585,7 @@ function Students() {
 
               <td>
 
-                #{student.rank}
+                {search ? "-" : `#${student.rank}`}
 
               </td>
 
