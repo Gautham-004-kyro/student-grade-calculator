@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 
 function Students() {
 
+  const [search, setSearch] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const studentsPerPage = 5;
@@ -152,10 +154,32 @@ function Students() {
     doc.save(`${student.name}-result.pdf`);
   };
 
+    const filteredStudents = students.filter(
+
+  (student) =>
+
+    student.name
+
+      .toLowerCase()
+
+      .includes(search.toLowerCase()) ||
+
+    student.grade
+
+      .toLowerCase()
+
+      .includes(search.toLowerCase()) ||
+
+    student.status
+
+      .toLowerCase()
+
+      .includes(search.toLowerCase())
+
+);
 
 
-
-  const rankedStudents = [...students]
+  const rankedStudents = [...filteredStudents]
 
     .sort((a, b) =>
       b.percentage - a.percentage
@@ -489,7 +513,21 @@ function Students() {
 
       </div>
 
+      <input
 
+          type="text"
+
+          placeholder="Search student..."
+
+          value={search}
+
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
+
+          className="search-input"
+
+        />
 
 
       <table>

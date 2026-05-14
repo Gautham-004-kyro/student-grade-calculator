@@ -645,6 +645,19 @@ th {
   margin-bottom: 25px;
 }
 
+.search-input {
+
+          padding: 12px;
+
+          border-radius: 10px;
+
+          border: 1px solid #ccc;
+
+          font-size: 16px;
+
+          width: 250px;
+
+        }
 
 
 .sort-select {
