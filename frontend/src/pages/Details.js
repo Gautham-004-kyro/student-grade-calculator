@@ -579,7 +579,9 @@ function Students() {
 
               <td>
 
-                {`#${student.rank}`}
+                {!search && student.rank
+                  ? student.rank
+                  : "-"}
 
               </td>
 
