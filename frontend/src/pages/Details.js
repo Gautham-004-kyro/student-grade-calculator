@@ -154,26 +154,21 @@ function Students() {
     doc.save(`${student.name}-result.pdf`);
   };
 
-    const filteredStudents = students.filter(
+  
+  const filteredStudents = students.filter(
 
   (student) =>
 
     student.name
-
       .toLowerCase()
-
       .includes(search.toLowerCase()) ||
 
     student.grade
-
       .toLowerCase()
-
       .includes(search.toLowerCase()) ||
 
     student.status
-
       .toLowerCase()
-
       .includes(search.toLowerCase())
 
 );
