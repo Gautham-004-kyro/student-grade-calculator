@@ -179,7 +179,7 @@ function Students() {
 );
 
 
-  const rankedStudents = [...filteredStudents]
+  const rankedStudents = [...students]
 
     .sort((a, b) =>
       b.percentage - a.percentage
