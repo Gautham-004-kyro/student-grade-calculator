@@ -30,7 +30,7 @@ function Home() {
     try {
 
       await fetch(
-        "https://student-grade-calculator-yu9q.onrender.com/api/logout/",
+        "https://student-grade-calculator-2e9a.onrender.com/api/logout/",
         {
           method: "POST",
 

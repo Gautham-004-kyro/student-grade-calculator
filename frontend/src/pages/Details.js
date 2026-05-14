@@ -48,7 +48,7 @@ function Students() {
     try {
 
       const res = await fetch(
-        "https://student-grade-calculator-yu9q.onrender.com/api/students/"
+        "https://student-grade-calculator-2e9a.onrender.com/api/students/"
       );
 
       const data = await res.json();
@@ -70,7 +70,7 @@ function Students() {
     try {
 
       await fetch(
-        `https://student-grade-calculator-yu9q.onrender.com/api/delete-student/${id}/`,
+        `https://student-grade-calculator-2e9a.onrender.com/api/delete-student/${id}/`,
         {
           method: "DELETE",
         }
@@ -225,7 +225,7 @@ function Students() {
 
       const res = await fetch(
 
-        `https://student-grade-calculator-yu9q.onrender.com/api/update-student/${editData.id}/`,
+        `https://student-grade-calculator-2e9a.onrender.com/api/update-student/${editData.id}/`,
 
         {
 

@@ -31,9 +31,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
 
-    "student-grade-calculator-yu9q.onrender.com",
+    "student-grade-calculator-2e9a.onrender.com",
 
-    "student-grade-calculator-1-phzz.onrender.com",
+    "student-grade-calculator-1-7g6i.onrender.com",
 
     "127.0.0.1",
 
@@ -46,8 +46,8 @@ ALLOWED_HOSTS = [
 # CORS SETTINGS
 
 CORS_ALLOWED_ORIGINS = [
-    "https://student-grade-calculator-yu9q.onrender.com",
-    "https://student-grade-calculator-1-phzz.onrender.com",
+    "https://student-grade-calculator-2e9a.onrender.com",
+    "https://student-grade-calculator-1-7g6i.onrender.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -76,9 +76,9 @@ CORS_ALLOW_METHODS = [
 
 CSRF_TRUSTED_ORIGINS = [
 
-    "https://student-grade-calculator-yu9q.onrender.com",
+    "https://student-grade-calculator-2e9a.onrender.com",
 
-    "https://student-grade-calculator-1-phzz.onrender.com",
+    "https://student-grade-calculator-1-7g6i.onrender.com",
 
     "http://localhost:3000",
     "http://127.0.0.1:3000",

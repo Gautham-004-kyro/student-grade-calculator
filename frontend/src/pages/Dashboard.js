@@ -31,7 +31,7 @@ function Dashboard() {
   useEffect(() => {
 
     fetch(
-      "https://student-grade-calculator-yu9q.onrender.com/api/students/"
+      "https://student-grade-calculator-2e9a.onrender.com/api/students/"
     )
 
       .then((res) => res.json())

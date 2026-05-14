@@ -29,7 +29,7 @@ function Login() {
 
       const res = await fetch(
 
-        "https://student-grade-calculator-yu9q.onrender.com/api/login/",
+        "https://student-grade-calculator-2e9a.onrender.com/api/login/",
 
         {
 

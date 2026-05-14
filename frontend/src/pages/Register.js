@@ -41,7 +41,7 @@ function Register() {
     try {
 
       const res = await fetch(
-        "https://student-grade-calculator-yu9q.onrender.com/api/send-otp/",
+        "https://student-grade-calculator-2e9a.onrender.com/api/send-otp/",
         {
           method: "POST",
 
@@ -93,7 +93,7 @@ function Register() {
       // VERIFY OTP
 
       const otpRes = await fetch(
-        "https://student-grade-calculator-yu9q.onrender.com/api/verify-otp/",
+        "https://student-grade-calculator-2e9a.onrender.com/api/verify-otp/",
         {
           method: "POST",
 
@@ -124,7 +124,7 @@ function Register() {
       // CREATE ACCOUNT
 
       const registerRes = await fetch(
-        "https://student-grade-calculator-yu9q.onrender.com/api/register/",
+        "https://student-grade-calculator-2e9a.onrender.com/api/register/",
         {
           method: "POST",
 
