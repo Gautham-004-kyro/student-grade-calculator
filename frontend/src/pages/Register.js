@@ -95,67 +95,143 @@ function Register() {
 
   const sendOtp = async () => {
 
-    if (!usernameAvailable) {
+  if (
 
-  toast.error(
+    usernameMessage ===
 
     "Username already taken"
 
-  );
+  ) {
 
-  return;
+    toast.error(
 
-}
+      "Username already taken"
 
-    setError();
+    );
+
+    return;
+
+  }
 
 
 
-    if (password !== confirmPassword) {
+  setError("");
 
-      setError("Passwords do not match");
 
-      return;
-    }
 
-    try {
+  if (password !== confirmPassword) {
 
-      const res = await fetch(
-        "https://student-grade-calculator-2e9a.onrender.com/api/send-otp/",
-        {
-          method: "POST",
+    setError("Passwords do not match");
 
-          headers: {
-            "Content-Type": "application/json",
-          },
+    return;
 
-          body: JSON.stringify({
-            email,
-          }),
-        }
-      );
+  }
 
-      const data = await res.json();
 
-      if (res.ok) {
 
-        setOtpSent(true);
+  if (!email) {
 
-      } else {
+    setError("Enter email");
 
-        setError(data.error || "Failed to send OTP");
+    return;
+
+  }
+
+
+
+  try {
+
+    const res = await fetch(
+
+      "https://student-grade-calculator-2e9a.onrender.com/api/send-otp/",
+
+      {
+
+        method: "POST",
+
+
+
+        headers: {
+
+          "Content-Type": "application/json",
+
+        },
+
+
+
+        body: JSON.stringify({
+
+          email,
+
+        }),
 
       }
 
-    } catch (err) {
+    );
 
-      console.log(err);
 
-      setError("Server not reachable");
+
+    const data = await res.json();
+
+
+
+    if (res.ok) {
+
+      toast.success(
+
+        "OTP sent successfully!"
+
+      );
+
+
+
+      setOtpSent(true);
+
+    } else {
+
+      toast.error(
+
+        data.error ||
+
+        "Failed to send OTP"
+
+      );
+
+
+
+      setError(
+
+        data.error ||
+
+        "Failed to send OTP"
+
+      );
 
     }
-  };
 
+  } catch (err) {
+
+    console.log(err);
+
+
+
+    toast.error(
+
+      "Server not reachable"
+
+    );
+
+
+
+    setError(
+
+      "Server not reachable"
+
+    );
+
+  }
+
+};
 
 
   // ✅ VERIFY OTP + CREATE ACCOUNT
