@@ -49,7 +49,7 @@ function Register() {
 
     const res = await fetch(
 
-      `https://student-grade-calculator-yu9q.onrender.com/api/check-username/${value}/`
+      `https://student-grade-calculator-2e9a.onrender.com/api/check-username/${value}/`
 
     );
 
@@ -128,7 +128,7 @@ function Register() {
 
     const checkRes = await fetch(
 
-      `https://student-grade-calculator-yu9q.onrender.com/api/check-username/${username}/`
+      `https://student-grade-calculator-2e9a.onrender.com/api/check-username/${username}/`
 
     );
 
