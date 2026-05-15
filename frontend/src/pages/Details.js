@@ -793,7 +793,10 @@ function Students() {
             />
 
 
+            <p className="edit-subtitle">
 
+              Maths
+            </p>
 
             <input
               type="number"
@@ -809,7 +812,9 @@ function Students() {
             />
 
 
-
+            <p className="edit-subtitle">
+              Physics
+            </p>
 
             <input
               type="number"
@@ -825,7 +830,9 @@ function Students() {
             />
 
 
-
+            <p className="edit-subtitle"> 
+              Chemistry
+            </p>
 
             <input
               type="number"
@@ -840,7 +847,9 @@ function Students() {
               }
             />
 
-
+            <p className="edit-subtitle">
+              English
+            </p>
 
 
             <input
@@ -856,7 +865,9 @@ function Students() {
               }
             />
 
-
+            <p className="edit-subtitle">
+              Computer Science
+            </p>
 
 
             <input
