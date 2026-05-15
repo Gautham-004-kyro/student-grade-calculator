@@ -38,63 +38,6 @@ function Students() {
     subject5: "",
   });
 
-  useEffect(() => {
-
-  const interval = setInterval(
-
-    async () => {
-
-      try {
-
-        const res = await fetch(
-
-          "https://student-grade-calculator-2e9a.onrender.com/api/check-auth/",
-
-          {
-
-            credentials: "include",
-
-          }
-
-        );
-
-
-
-        const data = await res.json();
-
-
-
-        if (!data.authenticated) {
-
-          toast.error(
-
-            "Session expired"
-
-          );
-
-
-
-          navigate("/");
-
-        }
-
-      } catch (err) {
-
-        console.log(err);
-
-      }
-
-    },
-
-    5000
-
-  );
-
-
-
-  return () => clearInterval(interval);
-
-}, [navigate]);
 
   useEffect(() => {
 
