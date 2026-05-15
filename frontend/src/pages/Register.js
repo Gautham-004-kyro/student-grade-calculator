@@ -95,27 +95,17 @@ function Register() {
 
   const sendOtp = async () => {
 
-  if (
+  setError("");
 
-    usernameMessage ===
 
-    "Username already taken"
 
-  ) {
+  if (!username.trim()) {
 
-    toast.error(
-
-      "Username already taken"
-
-    );
+    toast.error("Enter username");
 
     return;
 
   }
-
-
-
-  setError("");
 
 
 
@@ -129,17 +119,39 @@ function Register() {
 
 
 
-  if (!email) {
-
-    setError("Enter email");
-
-    return;
-
-  }
-
-
-
   try {
+
+    // CHECK USERNAME AGAIN BEFORE OTP
+
+    const checkRes = await fetch(
+
+      `https://student-grade-calculator-yu9q.onrender.com/api/check-username/${username}/`
+
+    );
+
+
+
+    const checkData = await checkRes.json();
+
+
+
+    if (checkData.exists) {
+
+      toast.error(
+
+        "Username already taken"
+
+      );
+
+
+
+      return;
+
+    }
+
+
+
+    // SEND OTP
 
     const res = await fetch(
 
@@ -197,16 +209,6 @@ function Register() {
 
       );
 
-
-
-      setError(
-
-        data.error ||
-
-        "Failed to send OTP"
-
-      );
-
     }
 
   } catch (err) {
@@ -216,14 +218,6 @@ function Register() {
 
 
     toast.error(
-
-      "Server not reachable"
-
-    );
-
-
-
-    setError(
 
       "Server not reachable"
 
