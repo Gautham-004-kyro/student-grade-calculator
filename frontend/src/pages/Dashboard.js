@@ -37,7 +37,7 @@ useEffect(() => {
 
         const res = await fetch(
 
-          "https://student-grade-calculator-yu9q.onrender.com/api/check-auth/",
+          "https://student-grade-calculator-2e9a.onrender.com/api/check-auth/",
 
           {
 

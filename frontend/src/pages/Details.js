@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Students() {
 
   const [search, setSearch] = useState("");
-  
+
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +48,7 @@ function Students() {
 
         const res = await fetch(
 
-          "https://student-grade-calculator-yu9q.onrender.com/api/check-auth/",
+          "https://student-grade-calculator-2e9a.onrender.com/api/check-auth/",
 
           {
 
