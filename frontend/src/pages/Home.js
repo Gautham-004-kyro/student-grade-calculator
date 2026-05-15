@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
-
 import Calculator from "./Calculator";
 
 import { toast } from "react-toastify";
@@ -9,7 +7,7 @@ import { toast } from "react-toastify";
 
 function Home() {
 
-  const navigate = useNavigate();
+
 
   useEffect(() => {
 
@@ -48,64 +46,6 @@ function Home() {
       console.error(err);
     }
   };
-
- useEffect(() => {
-
-  const interval = setInterval(
-
-    async () => {
-
-      try {
-
-        const res = await fetch(
-
-          "https://student-grade-calculator-2e9a.onrender.com/api/check-auth/",
-
-          {
-
-            credentials: "include",
-
-          }
-
-        );
-
-
-
-        const data = await res.json();
-
-
-
-        if (!data.authenticated) {
-
-          toast.error(
-
-            "Session expired"
-
-          );
-
-
-
-          navigate("/");
-
-        }
-
-      } catch (err) {
-
-        console.log(err);
-
-      }
-
-    },
-
-    5000
-
-  );
-
-
-
-  return () => clearInterval(interval);
-
-}, [navigate]);
 
 
   return (
