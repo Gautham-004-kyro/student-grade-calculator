@@ -234,7 +234,7 @@ const topper =
               onClick={() => {
                 setTimeout(() => {
                   navigate("/");
-                  
+                  toast.success("Logged out successfully");
                 }, 1000);
               }}
             >
