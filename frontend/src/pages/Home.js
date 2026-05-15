@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import Calculator from "./Calculator";
-
 import { toast } from "react-toastify";
 
 
 function Home() {
 
-
+  const navigate = useNavigate();
 
   useEffect(() => {
 
