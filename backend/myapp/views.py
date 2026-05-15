@@ -26,13 +26,41 @@ def register(request):
 
 
 
-        if User.objects.filter(username=username).exists():
+        # CHECK USERNAME
+
+        if User.objects.filter(
+
+            username=username
+
+        ).exists():
 
             return JsonResponse({
-                "error": "Username already exists"
+
+                "error":
+                "Username already exists"
+
             }, status=400)
 
 
+
+        # CHECK EMAIL
+
+        if User.objects.filter(
+
+            email=email
+
+        ).exists():
+
+            return JsonResponse({
+
+                "error":
+                "Email already exists"
+
+            }, status=400)
+
+
+
+        # CREATE USER
 
         User.objects.create_user(
 
@@ -41,18 +69,25 @@ def register(request):
             email=email,
 
             password=password
+
         )
 
 
 
         return JsonResponse({
-            "message": "Account created successfully"
+
+            "message":
+            "Account created successfully"
+
         })
 
 
 
     return JsonResponse({
-        "error": "Only POST method allowed"
+
+        "error":
+        "Only POST method allowed"
+
     }, status=405)
 
 
@@ -89,8 +124,6 @@ def api_login(request):
         "error": "Only POST method allowed"
     }, status=405)
 
-
-
 def check_username(request, username):
 
     exists = User.objects.filter(
@@ -106,7 +139,6 @@ def check_username(request, username):
         "exists": exists
 
     })
-
 
 otp_storage = {}
 

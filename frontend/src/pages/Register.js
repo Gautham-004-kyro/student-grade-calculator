@@ -41,6 +41,8 @@ function Register() {
 
   }
 
+  
+
 
 
   try {
@@ -82,6 +84,7 @@ function Register() {
       setUsernameAvailable(true);
 
     }
+    
 
   } catch (err) {
 
