@@ -4,6 +4,10 @@ import { toast } from "react-toastify";
 
 function Register() {
 
+  const [usernameMessage, setUsernameMessage] = useState("");
+
+  const [usernameAvailable, setUsernameAvailable] = useState(true);
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -23,6 +27,69 @@ function Register() {
   const [error, setError] = useState("");
 
 
+  const checkUsername = async (value) => {
+
+  setUsername(value);
+
+
+
+  if (value.length < 3) {
+
+    setUsernameMessage("");
+
+    return;
+
+  }
+
+
+
+  try {
+
+    const res = await fetch(
+
+      `https://student-grade-calculator-yu9q.onrender.com/api/check-username/${value}/`
+
+    );
+
+
+
+    const data = await res.json();
+
+
+
+    if (data.exists) {
+
+      setUsernameMessage(
+
+        "Username already taken"
+
+      );
+
+
+
+      setUsernameAvailable(false);
+
+    } else {
+
+      setUsernameMessage(
+
+        "Username available"
+
+      );
+
+
+
+      setUsernameAvailable(true);
+
+    }
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+
+};
 
   // ✅ SEND OTP
 
@@ -193,9 +260,27 @@ function Register() {
           type="text"
           placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) =>checkUsername(e.target.value)}
           required
         />
+
+        <p
+
+  className={
+
+    usernameAvailable
+
+      ? "success-msg"
+
+      : "error-msg"
+
+  }
+
+>
+
+  {usernameMessage}
+
+</p>
 
 
 

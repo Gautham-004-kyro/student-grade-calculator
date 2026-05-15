@@ -1304,3 +1304,25 @@ th {
   align-items: center;
 
 }
+
+.success-msg {
+
+  color: limegreen;
+
+  font-size: 14px;
+
+  margin-top: 5px;
+
+}
+
+
+
+.error-msg {
+
+  color: red;
+
+  font-size: 14px;
+
+  margin-top: 5px;
+
+}

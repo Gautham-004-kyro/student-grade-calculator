@@ -90,6 +90,24 @@ def api_login(request):
     }, status=405)
 
 
+
+def check_username(request, username):
+
+    exists = User.objects.filter(
+
+        username=username
+
+    ).exists()
+
+
+
+    return JsonResponse({
+
+        "exists": exists
+
+    })
+
+
 otp_storage = {}
 
 @csrf_exempt

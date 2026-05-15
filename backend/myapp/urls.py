@@ -23,4 +23,6 @@ urlpatterns = [
 
     path("update-student/<int:id>/",views.update_student),
 
+    path("check-username/<str:username>/",views.check_username),
+
 ]
