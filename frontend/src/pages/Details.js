@@ -774,7 +774,7 @@ function Students() {
 
           <div className="popup">
 
-            <h2>Edit Student</h2>
+            <h2>Edit Student Details</h2>
 
 
             <p className="edit-subtitle">
