@@ -1,4 +1,3 @@
-from urllib import request
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import Student
@@ -289,17 +288,40 @@ def api_logout(request):
         "message": "Logged out successfully"
     })
 
+
 def check_auth(request):
 
     if request.user.is_authenticated:
 
-        return JsonResponse({
-            "authenticated": True,
-            "username": request.user.username
-        })
+        try:
+
+            User.objects.get(
+
+                id=request.user.id
+
+            )
+
+
+
+            return JsonResponse({
+
+                "authenticated": True,
+
+                "username":
+                request.user.username
+
+            })
+
+        except User.DoesNotExist:
+
+            logout(request)
+
+
 
     return JsonResponse({
+
         "authenticated": False
+
     })
 
 
@@ -342,7 +364,7 @@ def update_student(request, id):
 
         data = json.loads(request.body)
 
-        student =Student.objects.get(id=id)
+        student = Student.objects.get(id=id)
 
 
 
@@ -474,6 +496,9 @@ def calculate(request):
 
             name = data.get('name')
             marks = data.get('marks', [])
+
+            if len(marks) != 5:
+                return JsonResponse({'error': 'Exactly 5 marks required'}, status=400)
 
             total = sum(marks)
             percentage = total / len(marks) if marks else 0

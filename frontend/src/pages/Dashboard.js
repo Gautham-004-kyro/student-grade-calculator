@@ -26,6 +26,65 @@ function Dashboard() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
 
+  
+useEffect(() => {
+
+  const interval = setInterval(
+
+    async () => {
+
+      try {
+
+        const res = await fetch(
+
+          "https://student-grade-calculator-yu9q.onrender.com/api/check-auth/",
+
+          {
+
+            credentials: "include",
+
+          }
+
+        );
+
+
+
+        const data = await res.json();
+
+
+
+        if (!data.authenticated) {
+
+          toast.error(
+
+            "Session expired"
+
+          );
+
+
+
+          navigate("/");
+
+        }
+
+      } catch (err) {
+
+        console.log(err);
+
+      }
+
+    },
+
+    5000
+
+  );
+
+
+
+  return () => clearInterval(interval);
+
+}, [navigate]);
+
 
 
 
@@ -236,7 +295,7 @@ const topper =
               onClick={() => {
                 setTimeout(() => {
                   navigate("/");
-                   toast.success("Logged out successfully!");
+                  
                 }, 1000);
               }}
             >
