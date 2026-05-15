@@ -96,8 +96,6 @@ function Students() {
 
 }, [navigate]);
 
-
-
   useEffect(() => {
 
     fetchStudents();

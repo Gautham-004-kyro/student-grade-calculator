@@ -49,7 +49,7 @@ function Home() {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
 
   const interval = setInterval(
 
@@ -106,7 +106,6 @@ function Home() {
   return () => clearInterval(interval);
 
 }, [navigate]);
-
 
 
   return (

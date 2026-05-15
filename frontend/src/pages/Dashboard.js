@@ -26,8 +26,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
 
-  
-useEffect(() => {
+  useEffect(() => {
 
   const interval = setInterval(
 
@@ -84,9 +83,6 @@ useEffect(() => {
   return () => clearInterval(interval);
 
 }, [navigate]);
-
-
-
 
   useEffect(() => {
 
