@@ -777,6 +777,10 @@ function Students() {
             <h2>Edit Student</h2>
 
 
+            <p className="edit-subtitle">
+
+             Edit Student Name
+            </p>
 
 
             <input
@@ -795,7 +799,7 @@ function Students() {
 
             <p className="edit-subtitle">
 
-              Maths
+             Edit Maths Marks
             </p>
 
             <input
@@ -813,7 +817,7 @@ function Students() {
 
 
             <p className="edit-subtitle">
-              Physics
+              Edit Physics Marks
             </p>
 
             <input
@@ -831,7 +835,7 @@ function Students() {
 
 
             <p className="edit-subtitle"> 
-              Chemistry
+              Edit Chemistry Marks
             </p>
 
             <input
@@ -848,7 +852,7 @@ function Students() {
             />
 
             <p className="edit-subtitle">
-              English
+              Edit English Marks
             </p>
 
 
@@ -866,7 +870,7 @@ function Students() {
             />
 
             <p className="edit-subtitle">
-              Computer Science
+              Edit Computer Science Marks
             </p>
 
 
