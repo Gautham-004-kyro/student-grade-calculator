@@ -95,7 +95,19 @@ function Register() {
 
   const sendOtp = async () => {
 
-    setError("");
+    if (!usernameAvailable) {
+
+  toast.error(
+
+    "Username already taken"
+
+  );
+
+  return;
+
+}
+
+    setError();
 
 
 
