@@ -293,28 +293,34 @@ def check_auth(request):
 
     if request.user.is_authenticated:
 
-        try:
+        user_exists = User.objects.filter(
 
-            User.objects.get(
+            id=request.user.id
 
-                id=request.user.id
-
-            )
+        ).exists()
 
 
+
+        if not user_exists:
+
+            logout(request)
 
             return JsonResponse({
 
-                "authenticated": True,
-
-                "username":
-                request.user.username
+                "authenticated": False
 
             })
 
-        except User.DoesNotExist:
 
-            logout(request)
+
+        return JsonResponse({
+
+            "authenticated": True,
+
+            "username":
+            request.user.username
+
+        })
 
 
 
@@ -323,7 +329,6 @@ def check_auth(request):
         "authenticated": False
 
     })
-
 
 
 def all_students(request):
