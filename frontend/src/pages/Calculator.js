@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { toast } from "react-toastify";
@@ -14,6 +15,8 @@ function Calculator() {
   const [result, setResult] = useState(null);
 
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
 

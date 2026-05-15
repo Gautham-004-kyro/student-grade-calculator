@@ -3,10 +3,13 @@ import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Students() {
 
   const [search, setSearch] = useState("");
+  
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
 
