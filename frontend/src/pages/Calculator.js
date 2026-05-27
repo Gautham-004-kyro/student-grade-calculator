@@ -138,6 +138,13 @@ function Calculator() {
 
     <div className="container">
 
+      <button
+        className="back-btn"
+        onClick={() => navigate(-1)}
+      >
+        ← Back
+      </button>
+
       <h2 className="title">
         Enter Student Details
       </h2>
