@@ -189,6 +189,13 @@ const topper =
 
     <div className="dashboard-page">
 
+      <button
+          className="back-btn"
+          onClick={() => navigate(-1)}
+        >
+          ← Back
+      </button>
+
 
 
       {/* HEADER */}

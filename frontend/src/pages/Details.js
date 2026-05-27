@@ -460,6 +460,13 @@ function Students() {
 
     <div className="table-container">
 
+      <button
+        className="back-btn"
+        onClick={() => navigate(-1)}
+      >
+        ← Back
+      </button>
+
       <h1 className="details-title">
 
         Students Details
