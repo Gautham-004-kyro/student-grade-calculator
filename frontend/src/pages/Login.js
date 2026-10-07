@@ -198,11 +198,11 @@ function Login() {
           </button>
 
           <p 
-  className="forgot-password-link"
-  onClick={() => navigate("/forgot-password")}
->
-  Forgot Password?
-</p>
+              className="forgot-password-link"
+              onClick={() => navigate("/forgot-password")}
+            >
+              Forgot Password?
+          </p>
 
 
 

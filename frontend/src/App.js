@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Students from "./pages/Details";
 import "./styles.css";
 import Dashboard from "./pages/Dashboard";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
 
@@ -19,6 +20,11 @@ function App() {
         <Route
           path="/"
           element={<Login />}
+        />
+
+        <Route
+          path="/forgot-password"
+          element={<ForgotPassword />}
         />
 
         <Route

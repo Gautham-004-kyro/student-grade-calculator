@@ -123,6 +123,85 @@ def api_login(request):
         "error": "Only POST method allowed"
     }, status=405)
 
+    @csrf_exempt
+def forgot_password(request):
+
+    data = json.loads(request.body)
+
+    email = data.get("email")
+
+    user = User.objects.filter(email=email).first()
+
+    if not user:
+        return JsonResponse({
+            "success":False,
+            "message":"Email not found"
+        })
+
+
+    otp = random.randint(100000,999999)
+
+    otp_storage[email] = otp
+
+
+    send_otp_email(email, otp)
+
+
+    return JsonResponse({
+        "success":True,
+        "message":"OTP sent successfully"
+    })
+
+    @csrf_exempt
+def verify_reset_otp(request):
+
+    data=json.loads(request.body)
+
+    email=data.get("email")
+    otp=data.get("otp")
+
+
+    if otp_storage.get(email)==int(otp):
+
+        return JsonResponse({
+            "success":True
+        })
+
+
+    return JsonResponse({
+        "success":False,
+        "message":"Invalid OTP"
+    })
+
+    @csrf_exempt
+def reset_password(request):
+
+    data=json.loads(request.body)
+
+    email=data.get("email")
+    password=data.get("password")
+
+
+    user=User.objects.filter(email=email).first()
+
+
+    if user:
+
+        user.set_password(password)
+        user.save()
+
+
+        return JsonResponse({
+            "success":True,
+            "message":"Password updated"
+        })
+
+
+    return JsonResponse({
+        "success":False
+    })
+    
+
 def check_username(request, username):
 
     exists = User.objects.filter(

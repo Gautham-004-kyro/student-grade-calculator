@@ -25,4 +25,10 @@ urlpatterns = [
 
     path("check-username/<str:username>/",views.check_username),
 
+    path("forgot-password/",views.forgot_password),
+
+    path("verify-reset-otp/",views.verify_reset_otp),
+
+    path("reset-password/",views.reset_password),
+
 ]
