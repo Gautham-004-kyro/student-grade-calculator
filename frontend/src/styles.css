@@ -171,7 +171,15 @@ label {
 }
 
 .auth-container {
-  width: 430px;
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* TITLES */
@@ -284,16 +292,13 @@ button:hover {
 
 
 
-.auth-box{
-
-    width:350px;
-
-    padding:30px;
-
-    border-radius:12px;
-
+.auth-box {
+    width: 350px;
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 12px;
+    box-sizing: border-box;
 }
-
 
 
 .auth-box input{
