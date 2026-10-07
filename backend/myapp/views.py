@@ -123,84 +123,163 @@ def api_login(request):
         "error": "Only POST method allowed"
     }, status=405)
 
-    @csrf_exempt
+@csrf_exempt
 def forgot_password(request):
 
-    data = json.loads(request.body)
-
-    email = data.get("email")
-
-    user = User.objects.filter(email=email).first()
-
-    if not user:
+    if request.method != "POST":
         return JsonResponse({
-            "success":False,
-            "message":"Email not found"
+            "error": "Only POST allowed"
+        }, status=405)
+
+    try:
+        data = json.loads(request.body)
+        email = data.get("email")
+
+        if not email:
+            return JsonResponse({
+                "success": False,
+                "message": "Email required"
+            }, status=400)
+
+        user = User.objects.filter(email=email).first()
+
+        if not user:
+            return JsonResponse({
+                "success": False,
+                "message": "Email not found"
+            }, status=404)
+
+        # Generate OTP
+        otp = str(random.randint(100000, 999999))
+
+        # Store OTP
+        otp_storage[email] = otp
+
+        # Brevo configuration
+        configuration = sib_api_v3_sdk.Configuration()
+        configuration.api_key['api-key'] = settings.BREVO_API_KEY
+
+        api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+            sib_api_v3_sdk.ApiClient(configuration)
+        )
+
+        send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+            to=[
+                {
+                    "email": email
+                }
+            ],
+            sender={
+                "name": "Student Grade Calculator",
+                "email": "gauthamkrishna004@gmail.com"
+            },
+            subject="Password Reset OTP",
+            html_content=f"<h2>Your password reset OTP is: {otp}</h2>"
+        )
+
+        api_instance.send_transac_email(send_smtp_email)
+
+        return JsonResponse({
+            "success": True,
+            "message": "OTP sent successfully"
         })
 
+    except ApiException as e:
 
-    otp = random.randint(100000,999999)
+        return JsonResponse({
+            "success": False,
+            "message": str(e)
+        }, status=500)
 
-    otp_storage[email] = otp
+    except Exception as e:
+
+        return JsonResponse({
+            "success": False,
+            "message": str(e)
+        }, status=500)
 
 
-    send_otp_email(email, otp)
-
-
-    return JsonResponse({
-        "success":True,
-        "message":"OTP sent successfully"
-    })
-
-    @csrf_exempt
+@csrf_exempt
 def verify_reset_otp(request):
 
-    data=json.loads(request.body)
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "Only POST allowed"
+        }, status=405)
 
-    email=data.get("email")
-    otp=data.get("otp")
+    try:
 
+        data = json.loads(request.body)
 
-    if otp_storage.get(email)==int(otp):
+        email = data.get("email")
+        otp = data.get("otp")
+
+        if otp_storage.get(email) == str(otp):
+
+            return JsonResponse({
+                "success": True,
+                "message": "OTP verified successfully"
+            })
 
         return JsonResponse({
-            "success":True
-        })
+            "success": False,
+            "message": "Invalid OTP"
+        }, status=400)
+
+    except Exception as e:
+
+        return JsonResponse({
+            "success": False,
+            "message": str(e)
+        }, status=500)
 
 
-    return JsonResponse({
-        "success":False,
-        "message":"Invalid OTP"
-    })
-
-    @csrf_exempt
+@csrf_exempt
 def reset_password(request):
 
-    data=json.loads(request.body)
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "Only POST allowed"
+        }, status=405)
 
-    email=data.get("email")
-    password=data.get("password")
+    try:
 
+        data = json.loads(request.body)
 
-    user=User.objects.filter(email=email).first()
+        email = data.get("email")
+        password = data.get("password")
 
+        if not email or not password:
+            return JsonResponse({
+                "success": False,
+                "message": "Email and password are required"
+            }, status=400)
 
-    if user:
+        user = User.objects.filter(email=email).first()
+
+        if not user:
+            return JsonResponse({
+                "success": False,
+                "message": "User not found"
+            }, status=404)
 
         user.set_password(password)
         user.save()
 
+        # Remove OTP after successful password reset
+        otp_storage.pop(email, None)
 
         return JsonResponse({
-            "success":True,
-            "message":"Password updated"
+            "success": True,
+            "message": "Password updated successfully"
         })
 
+    except Exception as e:
 
-    return JsonResponse({
-        "success":False
-    })
-    
+        return JsonResponse({
+            "success": False,
+            "message": str(e)
+        }, status=500)
 
 def check_username(request, username):
 
