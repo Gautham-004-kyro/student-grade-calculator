@@ -75,6 +75,7 @@ label {
   font-size: 18px;
 }
 
+
 .login-page,
 .register-page {
 
@@ -268,11 +269,28 @@ button:hover {
 
 }
 
+
 .forgot-password-link:hover{
 
     text-decoration:underline;
 
 }
+
+
+
+.auth-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+
 
 .auth-box {
     width: 350px;
@@ -281,6 +299,7 @@ button:hover {
     border-radius: 12px;
     box-sizing: border-box;
 }
+
 
 .auth-box input{
 
@@ -291,6 +310,8 @@ button:hover {
     margin:10px 0;
 
 }
+
+
 
 .auth-box button{
 
@@ -622,6 +643,8 @@ th {
   margin-bottom: 30px;
 }
 
+
+
 .analytics-card {
 
   padding: 25px;
@@ -637,12 +660,16 @@ th {
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
+
+
 .analytics-card h3 {
 
   margin-bottom: 10px;
 
   font-size: 18px;
 }
+
+
 
 .analytics-card p {
 
@@ -679,6 +706,8 @@ th {
   margin-bottom: 40px;
 }
 
+
+
 .table-top-bar {
 
   width: 100%;
@@ -705,6 +734,7 @@ th {
           width: 250px;
 
         }
+
 
 .sort-select {
 
@@ -744,6 +774,8 @@ th {
   margin-top: 30px;
 }
 
+
+
 .chart-box h2 {
 
   text-align: center;
@@ -774,11 +806,15 @@ th {
 
   }
 
+
+
   table {
 
     min-width: 900px;
 
   }
+
+
 
   .table-top-bar {
 
@@ -790,6 +826,8 @@ th {
 
   }
 
+
+
   .excel-btn,
 
   .sort-select {
@@ -798,6 +836,8 @@ th {
 
   }
 
+
+
   .details-title {
 
     font-size: 28px;
@@ -805,6 +845,8 @@ th {
     text-align: center;
 
   }
+
+
 
   th,
 
@@ -815,6 +857,8 @@ th {
     padding: 10px;
 
   }
+
+
 
   .edit-btn,
 
@@ -830,6 +874,8 @@ th {
 
   }
 
+
+
   .popup {
 
     width: 95%;
@@ -838,11 +884,15 @@ th {
 
   }
 
+
+
   .popup input {
 
     width: 100%;
 
   }
+
+
 
   .pagination {
 
@@ -854,6 +904,9 @@ th {
 
 }
 
+
+
+
 @media screen and (max-width: 480px) {
 
   .details-title {
@@ -861,6 +914,8 @@ th {
     font-size: 24px;
 
   }
+
+
 
   th,
 
@@ -872,6 +927,8 @@ th {
 
   }
 
+
+
   .edit-btn,
 
   .delete-btn,
@@ -882,13 +939,414 @@ th {
 
   }
 
+}/* MOBILE RESPONSIVE FIXES */
+
+@media screen and (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 28px;
+
+    text-align: center;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 14px;
+
+    padding: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+    padding: 8px 10px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .popup input {
+
+    width: 100%;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
 }
 
-/* MOBILE RESPONSIVE FIXES */
 
-/* MOBILE RESPONSIVE FIXES */
 
-/* MOBILE RESPONSIVE FIXES */
+
+@media screen and (max-width: 480px) {
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    font-size: 12px;
+
+  }
+
+}/* MOBILE RESPONSIVE FIXES */
+
+@media screen and (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 28px;
+
+    text-align: center;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 14px;
+
+    padding: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+    padding: 8px 10px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .popup input {
+
+    width: 100%;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    font-size: 12px;
+
+  }
+
+}/* MOBILE RESPONSIVE FIXES */
+
+@media (max-width: 768px) {
+
+  .table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding: 15px;
+
+  }
+
+
+
+  table {
+
+    min-width: 900px;
+
+  }
+
+
+
+  .table-top-bar {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: stretch;
+
+  }
+
+
+
+  .excel-btn,
+
+  .sort-select {
+
+    width: 100%;
+
+  }
+
+
+
+  .details-title {
+
+    text-align: center;
+
+    font-size: 28px;
+
+  }
+
+
+
+  .popup {
+
+    width: 95%;
+
+    padding: 20px;
+
+  }
+
+
+
+  .pagination {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+
+
+  .edit-btn,
+
+  .delete-btn,
+
+  .pdf-btn {
+
+    width: 100%;
+
+    font-size: 13px;
+
+  }
+
+}
+
+
+
+
+@media (max-width: 480px) {
+
+  th,
+
+  td {
+
+    font-size: 12px;
+
+    padding: 8px;
+
+  }
+
+
+
+  .details-title {
+
+    font-size: 24px;
+
+  }
+
+}
 
 /* FIX TOAST CLOSE BUTTON */
 
@@ -914,6 +1372,9 @@ th {
 
 }
 
+
+
+
 .Toastify__toast {
 
   align-items: center;
@@ -929,6 +1390,8 @@ th {
   margin-top: 5px;
 
 }
+
+
 
 .error-msg {
 
