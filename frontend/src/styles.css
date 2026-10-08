@@ -256,7 +256,7 @@ button:hover {
 
 .forgot-password-link{
 
-    color:#51e2b9;
+    color:linear-gradient(45deg, #00c6ff, #0072ff);
 
     cursor:pointer;
 
