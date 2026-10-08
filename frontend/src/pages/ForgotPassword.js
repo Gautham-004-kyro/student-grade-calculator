@@ -23,7 +23,7 @@ function ForgotPassword() {
         try {
 
             const response = await fetch(
-                "/api/forgot-password/",
+                "https://student-grade-calculator-2e9a.onrender.com/api/forgot-password/",
                 {
                     method:"POST",
                     headers:{
@@ -73,7 +73,7 @@ function ForgotPassword() {
 
 
         const response = await fetch(
-            "/api/verify-reset-otp/",
+            "https://student-grade-calculator-2e9a.onrender.com/api/verify-reset-otp/",
             {
                 method:"POST",
 
@@ -135,7 +135,7 @@ function ForgotPassword() {
 
         const response = await fetch(
 
-            "/api/reset-password/",
+            "https://student-grade-calculator-2e9a.onrender.com/api/reset-password/",
 
             {
 
